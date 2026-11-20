@@ -1,0 +1,79 @@
+# Chapter measure-before-you-change's narration (re-check narration): descriptions of its examples, blocks and tables, as
+# [examples.ID], [[blocks]] and [[tables]], and its own readings. Only this chapter's writer edits this file, so
+# writers working in parallel never append to one shared lexicon. A reading every chapter needs goes into
+# narration/lexicon.toml, which wins over a chapter's.
+
+[examples.list-the-docs]
+say = "The code loads the three versions of the docs and counts the sections in each. It then counts the section IDs all three share, and the IDs that appear only in 2.0. The counts are {{out:list-the-docs:sections in version 1.0}} in 1.0, {{out:list-the-docs:sections in version 1.1}} in 1.1 and {{out:list-the-docs:sections in version 2.0}} in 2.0. {{out:list-the-docs:section IDs in all 3 versions}} IDs are shared by all three."
+
+[examples.twenty-questions]
+say = "The code prints the twenty items in ID order. For each one it gives the version, the kind, the twin if there is one, whether the item was planted, and the question. The last lines count the items of each kind: {{out:twenty-questions:items of kind answerable}} answerable, {{out:twenty-questions:items of kind unanswerable}} unanswerable, {{out:twenty-questions:items of kind version-dependent}} version-dependent and {{out:twenty-questions:items of kind ambiguous}} ambiguous."
+
+[examples.retrieve-top-sections]
+say = "The code takes one question about version 1.1 and prints the words the index keeps from it. It then prints the words kept from a short phrase with a measurement in it, where the index keeps the five and the M M, and drops the three. Last, it prints the top three sections the index returns, with their scores, in rank order."
+
+[examples.replay-one-answer]
+say = "The code prints the three sections the assistant was given for question q-0006, then the reply recorded for that question, and the citations the reply makes. It also prints the format problems, which here are none. The reply says yes and cites one section, which was among the three given."
+
+[examples.check-citations]
+say = "The code runs the citation and format checks over the baseline replies to the twenty items, and counts each kind of problem. It then gives two rates: citations to a section outside the prompt, and answered items with no citation. The rates are {{out:check-citations:citations to a section not in the prompt}} and {{out:check-citations:answered items with no citation}}."
+
+[examples.check-declines]
+say = "The code counts the two decline errors over the baseline replies: answerable items the assistant declined, and unanswerable items it answered. The false refusal rate is {{out:check-declines:false refusal rate (answerable items declined)}}, and the false answer rate is {{out:check-declines:false answer rate (unanswerable items answered)}}. It lists any item that makes either error, and it reports how many items the rates leave out. The last line names the items left out that the baseline declined, which is {{out:check-declines:declined, not counted here}}."
+
+[examples.judge-gets-one-wrong]
+say = "The code shows question q-0019, which has two readings, and the reply the second prompt gave to it, which answers only the first reading. It then prints the judge's verdict on that reply, which is PASS, and the judge's reason, which says the reply covers the reference. Next it prints the judge's verdict on the first prompt's reply to the same question, which is FAIL, and the rule the PASS breaks: a partial answer fails. Last, it counts the passes the second prompt gets as judged, {{out:judge-gets-one-wrong:P2 passes, as judged}}, and with q-0019 read by hand, {{out:judge-gets-one-wrong:P2 passes, with q-0019 read by hand}}."
+
+[examples.judge-one-answer]
+say = "The code shows question q-0005 with its reference answer and the assistant's reply. It then reads the judge's recorded verdict and the first line of its reason. The verdict is {{out:judge-one-answer:judge verdict}}, and the reason says the reply contradicts the reference."
+
+[examples.pass-rate-interval]
+say = "The code reads the judge's verdict for each of the twenty items, and counts a pass as one and a fail as zero. It prints the pass rate, its 95 percent interval from resampling the items, and the rate for each kind of item. The pass rate is {{out:pass-rate-interval:pass rate}}, and the interval is {{out:pass-rate-interval:95% interval of the pass rate}}."
+
+[examples.compare-two-prompts]
+say = "The code passes the same twenty items through both prompts and compares the verdicts item by item. It prints each prompt's pass rate, the number of items that only one prompt passes, and the difference between the prompts with its interval. P1 passes {{out:compare-two-prompts:P1 (baseline) pass rate}}, P2 passes {{out:compare-two-prompts:P2 (prompt-b) pass rate}}, and the difference is {{out:compare-two-prompts:difference, P2 minus P1}}, with the interval {{out:compare-two-prompts:95% interval of the difference}}."
+
+[examples.twenty-cannot-tell]
+say = "The code counts the items on which the two prompts' verdicts differ, and prints the paired difference with its interval and the width of that interval. It then checks that the interval includes zero. The verdicts differ on {{out:twenty-cannot-tell:items where the two verdicts differ}} items, and the interval is {{out:twenty-cannot-tell:interval width}} wide."
+
+[[blocks]]
+section = "a-pass-rate-and-its-interval"
+starts = "pass rate = passed items / items"
+say = "The pass rate is the number of passed items divided by the number of items, where a correct decline counts as a pass."
+
+[terms]
+"sablefile.lock" = "sable file dot lock"
+"sablefile.toml" = "sable file dot toml"
+".sablefile/lock.json" = "dot sable file slash lock dot JSON"
+"BM25" = "B M twenty-five"
+"bm25s" = "B M twenty-five S"
+"Qwen3-4B-Instruct-2507" = "Qwen three four B Instruct two five oh seven"
+"Qwen3-0.6B" = "Qwen three, zero point six B"
+"live=True" = "live equals True"
+"[sec:ID]" = "section citation"
+"3.5mm" = "three point five M M"
+"5mm" = "five M M"
+"docs/**/*.tmp" = "docs, any folder, star dot T M P"
+"${project}" = "dollar, brace, project, brace"
+"{{project}}" = "double brace, project, double brace"
+"--dry-run" = "dry run flag"
+"--apply" = "apply flag"
+"no-fail-flag" = "no fail flag"
+"ignore-recursive" = "ignore recursive"
+"q-0003" = "q zero zero zero three"
+"q-0004" = "q zero zero zero four"
+"q-0005" = "q zero zero zero five"
+"q-0006" = "q zero zero zero six"
+"q-0015" = "q zero zero one five"
+"q-0019" = "q zero zero one nine"
+"PASS" = "pass"
+"FAIL" = "fail"
+"P1" = "P one"
+"P2" = "P two"
+"build-the-test-set" = "build the test set"
+"calibrate-the-judge" = "calibrate the judge"
+"a-judge-with-a-rubric" = "a judge with a rubric"
+"intervals-and-sample-size" = "intervals and sample size"
+
+[words]
+"sablefile" = "sable file"

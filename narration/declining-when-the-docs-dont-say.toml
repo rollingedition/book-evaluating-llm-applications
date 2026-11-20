@@ -1,0 +1,36 @@
+# Chapter declining-when-the-docs-dont-say's narration (re-check narration): descriptions of its examples, blocks and tables, as
+# [examples.ID], [[blocks]] and [[tables]], and its own readings. Only this chapter's writer edits this file, so
+# writers working in parallel never append to one shared lexicon. A reading every chapter needs goes into
+# narration/lexicon.toml, which wins over a chapter's.
+
+[examples.decline-rates]
+say = "The code reads the four recordings' replies, the baseline, unfiltered, prompt-b and k5, first on the dev split and then on the held-out split. For each one it prints the false refusal rate and the false answer rate, with their counts and the items behind each. It also counts the declines it leaves out, because they belong to version-dependent or ambiguous items. For each false answer on dev, it prints the sections the reply cites and the reply's text. The baseline's dev false refusal rate is {{out:decline-rates:baseline dev false refusal rate (answerable declined)}}. Its dev false answer rate is {{out:decline-rates:baseline dev false answer rate (unanswerable answered)}}."
+
+[examples.tune-guard-dev]
+say = "The code first checks that the recorded sections of every dev item match what the index returns, and it stops if they don't. It then sweeps the guard's threshold over the dev replies of the unfiltered recording, from 0.00 up to 10.00 in steps of a quarter. At each threshold it prints the false refusal rate and the false answer rate, on separate lines. It prints the top score of each unanswerable item that is answered with no guard. Last, it prints the threshold the dev rule picks, which is {{out:tune-guard-dev:threshold chosen by the dev rule}}, and the two rates at that threshold. It asserts that the pick is zero."
+
+[examples.guard-held-out]
+say = "The code first asserts that the dev rule still picks the frozen threshold, and then applies that threshold to the held-out replies. It prints how many held-out replies the guard changes, which is {{out:guard-held-out:held-out replies the guard changed to declines}}. Then it prints both held-out error rates, each with an interval from resampling the items. An interval of zero width means the sample had no errors of that kind to resample."
+
+[[tables]]
+section = "what-the-baseline-does"
+starts = "| Recording |"
+say = "The table has a row for each of the four recordings, the baseline, unfiltered, prompt-b and k5. It has four columns: false refusals and false answers on the dev split, then on the held-out split. Each cell holds one rate with its counts, the same values the decline-rates example prints. Read the unfiltered row first, since it is the only row with false answers on dev."
+
+[terms]
+"BM25" = "B M twenty-five"
+"ICML" = "I C M L"
+"lib/guard.py" = "lib slash guard dot P Y"
+"prompt-b" = "prompt B"
+"k5" = "k five"
+"P1" = "P one"
+"P2" = "P two"
+"XSTest" = "X S test"
+"q-0005" = "q zero zero zero five"
+"q-0018" = "q zero zero one eight"
+"q-0039" = "q zero zero three nine"
+"q-0052" = "q zero zero five two"
+"q-0058" = "q zero zero five eight"
+"q-0060" = "q zero zero six oh"
+"q-0063" = "q zero zero six three"
+"q-0079" = "q zero zero seven nine"

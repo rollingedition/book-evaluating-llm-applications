@@ -1,0 +1,37 @@
+# Chapter calibrate-the-judge's narration (re-check narration): descriptions of its examples, blocks and tables, as
+# [examples.ID], [[blocks]] and [[tables]], and its own readings. Only this chapter's writer edits this file, so
+# writers working in parallel never append to one shared lexicon. A reading every chapter needs goes into
+# narration/lexicon.toml, which wins over a chapter's.
+
+[examples.calibration-agreement]
+say = "The code counts how often the judge's verdict matches the human rating, then the agreement that the two PASS rates alone would give by chance, and kappa, which takes that chance out. It prints each for all rows and for dev and held-out. Agreement on all rows is {{out:calibration-agreement:agreement, all}}, and kappa is {{out:calibration-agreement:kappa, all}}."
+
+[examples.rubric-b-agreement]
+say = "The code scores the second calibration wording on dev, next to the first. For each wording it prints agreement, kappa, TPR, TNR and both PASS rates. It then reads each row's verdict under both wordings and prints the paired difference with its interval, and the reading of that interval. Rubric B has no held-out line, because it was recorded on dev alone. The paired difference is {{out:rubric-b-agreement:paired difference, dev}}."
+
+[examples.tpr-tnr]
+say = "The code counts the judge's true positive rate and true negative rate, with PASS as the positive class, for all rows and for each split. On all rows, TPR is {{out:tpr-tnr:TPR, all}}, and TNR is {{out:tpr-tnr:TNR, all}}."
+
+[examples.corrected-pass-rate]
+say = "The code takes the baseline's answer-judge verdicts for the test items, leaves out any reply without a readable verdict and prints it by name, and applies the correction with TPR and TNR from dev only. The corrected rate is {{out:corrected-pass-rate:corrected pass rate}}, from an observed rate of {{out:corrected-pass-rate:observed pass rate, readable items}}. It also prints the crossover point on dev, {{out:corrected-pass-rate:crossover point, dev}}, the observed rate below which the correction lowers the rate and above which it raises it. The last lines apply the same correction to the calibration rows with their own rates, and the corrected judge rate comes back as the human PASS rate."
+
+[examples.correction-sensitivity]
+say = "The code resamples the dev rows and the readable test items 2,000 times with the book's fixed seed, and prints a 95 percent interval for the corrected rate, which is {{out:correction-sensitivity:corrected pass rate, 95% interval}}. It counts the resamples that reach the cap of 100 percent, and the resamples it refuses for a denominator under 0.1. Then it moves one dev row at a time, first TPR and then TNR, and prints the corrected rate each time: {{out:correction-sensitivity:corrected, TPR one row higher}} for one row higher on TPR, and {{out:correction-sensitivity:corrected, TPR one row lower}} for one row lower."
+
+[examples.pairwise-agreement]
+say = "The code reads the judge's verdict for each HelpSteer2 preference pair in both orders, and counts agreement with the human preference in the A,B order alone, in the B,A order alone, and in both orders together. The order-changed pairs, labelled flipped in the output, are printed beside the both-orders rate. On dev, agreement in both orders is {{out:pairwise-agreement:agreement, both orders, dev}}. Each split also prints an interval over pairs."
+
+[terms]
+"NVIDIA" = "en vid ee uh"
+"ASCII" = "ASK ee"
+"McHugh" = "Mc Hugh"
+"Kappa" = "kap uh"
+"kappa" = "kap uh"
+"TPR" = "T P R"
+"TNR" = "T N R"
+"p*" = "p star"
+"HelpSteer2" = "help steer two"
+"q-0043" = "q zero zero four three"
+"PARTIAL" = "partial"
+
+[words]

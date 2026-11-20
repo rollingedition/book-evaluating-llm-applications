@@ -1,0 +1,35 @@
+{
+ "script": "recordings/judge_answers.py",
+ "model": "Qwen/Qwen3-4B-Instruct-2507",
+ "model_version": "unsloth/Qwen3-4B-Instruct-2507-GGUF@a06e946bb6b655725eafa393f4a9745d460374c9 Qwen3-4B-Instruct-2507-Q4_K_M.gguf sha256:3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597",
+ "prompt_sha256": "4c409dcd59d0926646c3f8f5683da5de589e1586007dcfcf79d71a6b49e7e227",
+ "judge": "judge-4b",
+ "criterion": "reference-guided, PASS or FAIL",
+ "judges": {
+  "recording": "assistant-second-model",
+  "prompt_sha256": "61226b0250254ed2fad415fe8d745f4bddf8f8a68ead195ec2a7d5c394b67b5e"
+ },
+ "items": 120,
+ "samples": 1,
+ "tuned_on": "nothing",
+ "testset": "testset.jsonl",
+ "testset_sha256": "569e91126db989192d1d3f4f79e6ccc675b446b2d31bea2640792039a0117449",
+ "settings": {
+  "model": "Qwen/Qwen3-4B-Instruct-2507",
+  "model_version": "unsloth/Qwen3-4B-Instruct-2507-GGUF@a06e946bb6b655725eafa393f4a9745d460374c9 Qwen3-4B-Instruct-2507-Q4_K_M.gguf sha256:3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597",
+  "licence": "Apache-2.0",
+  "runner": "llama-cpp-python 0.3.36, CPU, 4 threads",
+  "sampling": {
+   "temperature": 0.0,
+   "max_tokens": 160
+  },
+  "seed": 4217,
+  "thinking": "none in this model"
+ },
+ "threads": 4,
+ "seed": 4217,
+ "created": "2026-11-20",
+ "outputs": [
+  "replies.jsonl"
+ ]
+}

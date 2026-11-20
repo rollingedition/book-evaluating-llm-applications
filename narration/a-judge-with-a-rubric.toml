@@ -1,0 +1,36 @@
+# Chapter a-judge-with-a-rubric's narration (re-check narration): descriptions of its examples, blocks and tables, as
+# [examples.ID], [[blocks]] and [[tables]], and its own readings. Only this chapter's writer edits this file, so
+# writers working in parallel never append to one shared lexicon. A reading every chapter needs goes into
+# narration/lexicon.toml, which wins over a chapter's.
+
+[examples.rubric-text]
+say = "The code prints the name of each of the five rubrics the book's judges use, with the line count of its system text, a hash of the system text and template together, and the rubric's first line. It reads each hash back against the recording made with that rubric, and stops with an error if they differ, so a recording can't be replayed under another rubric."
+
+[examples.parse-verdicts]
+say = "The code runs a set of fixed replies through the verdict parser and prints, for each, the verdict it reads, or the label refused for a reply with no readable verdict. The replies cover the forms the parser accepts, such as a verdict on the first line, and the forms it cannot read, such as lower case, a verdict after the reason, or an empty reply. A reply with no readable verdict is not a FAIL: the judge gave no verdict."
+
+[examples.pairwise-both-orders]
+say = "The code reads the judge's two recorded verdicts for each HelpSteer2 preference pair, one for each order, and maps each verdict back to the response it picked. It then sorts each pair as consistent, order-changed (labelled flipped in the output), tie or unreadable, and prints each kind's share on the dev split and on the held-out split. It also lists the first three pairs of each kind, in id order."
+
+[[blocks]]
+section = "tuning-the-wording"
+starts = "You grade whether an AI assistant's reply to a user is right."
+say = "Rubric B's instruction paragraph and its reply form, quoted as they are written. The rubric has two made-up examples as well, which the chapter leaves out. It tells the judge that a reply is right when every fact and result in it is correct, and that a reply making no false claim is right even when it is short or incomplete. It also says to grade no style, length or tone, and to answer with the verdict on the first line."
+
+[terms]
+"HelpSteer2" = "help steer two"
+"parse_verdict" = "parse verdict"
+"hs2-pref-0003" = "H S two pref zero zero zero three"
+"hs2-pref-0004" = "H S two pref zero zero zero four"
+"hs2-pref-0012" = "H S two pref zero zero one two"
+"AACL" = "A A C L"
+"ACL" = "A C L"
+"PARTIAL" = "partial"
+"arXiv:2306.05685" = "archive, twenty twenty-three oh six, oh five six eight five"
+"arXiv:2305.17926" = "archive, twenty twenty-three oh five, one seven nine two six"
+"NeurIPS" = "neur eye P S"
+"MT-Bench" = "M T bench"
+"a06e946" = "a zero six e nine four six"
+"TIE" = "tie"
+
+[words]

@@ -1,0 +1,38 @@
+# Chapter grounded-answers's narration (re-check narration): descriptions of its examples, blocks and tables, as
+# [examples.ID], [[blocks]] and [[tables]], and its own readings. Only this chapter's writer edits this file, so
+# writers working in parallel never append to one shared lexicon. A reading every chapter needs goes into
+# narration/lexicon.toml, which wins over a chapter's.
+
+[examples.citation-accuracy-counts]
+say = "The code takes the baseline's answered items on each split. It matches each cited ID against the item's listed supporting sections for the asked version, and it never reads the section's text. It prints the share of answered items with at least one supported citation, the answered items with none, and the shares of all citations that are supported, unlisted or wrong-version or missing. It never counts an unlisted citation as wrong. On dev, the item share is {{out:citation-accuracy-counts:dev answered items citing a supporting section of the asked version}}."
+
+[examples.faithfulness-rate]
+say = "The code takes the baseline's answered items and reads the judge's verdict on each one. A verdict is SUPPORTED or UNSUPPORTED, and any other reply is printed and left out. It prints the share of supported answers on each split, with an interval from resampling the items, and names the first unfaithful dev items. When every verdict is the same, the resampling interval cannot vary, so the code says so and prints an exact bound instead. The judge is uncalibrated, because this book has no human ratings for it. On dev, the uncalibrated rate is {{out:faithfulness-rate:dev faithfulness rate}}."
+
+[examples.version-correct-answers]
+say = "The code reads two variants, the baseline and the unfiltered one, on the version-dependent items only. For each variant it prints how many items the judge passes for the asked version, how many declined replies those rates count, and how many cite a section of another version. It then lists the items where the two variants' verdicts differ. On dev, the baseline is judged correct on {{out:version-correct-answers:baseline dev judged correct for the asked version}}."
+
+[examples.version-check-detail]
+say = "The code counts the section IDs that appear in one version only, by version. Then it counts, for each variant, the citations to version-dependent items that name an ID found in more than one version. Last, it lists the items where the two variants' verdicts differ, split into dev and held-out. On dev, {{out:version-check-detail:dev items where the verdicts differ}} items differ."
+
+[examples.retrieval-path]
+say = "The code sets each dev item that has a supporting section of the asked version against the judge's verdict for the baseline. Retrieval uses BM25 over the asked version, and the top k is the baseline's own, {{out:retrieval-path:top k}}. Each item falls into one of four cells, and declined replies stay in their cells. An unreadable verdict is printed and left out. The count of passes with no supporting section in the top k is {{out:retrieval-path:right section not in the top 3, PASS}}."
+
+[examples.fail-with-section]
+say = "The code takes the dev fails that had a listed section of the asked version in the top k, and splits them into declines and answers. For each answer it checks whether the reply cites a listed section, and reads the faithfulness judge's verdict. Of the answered fails, {{out:fail-with-section:answered FAIL with the section, faithfulness SUPPORTED}} are judged supported, and {{out:fail-with-section:answered FAIL with the section, faithfulness UNSUPPORTED}} is judged unsupported."
+
+[[tables]]
+section = "the-retrieval-step"
+starts = "| Verdict |"
+say = "A two-by-two table of the verdict, PASS or FAIL, against whether a supporting section is in the top k. The PASS row holds every pass, and its right-hand cell, passes with no supporting section, is {{out:retrieval-path:right section not in the top 3, PASS}}. The FAIL row holds the failures, and its left-hand cell, failures with the section retrieved, is {{out:retrieval-path:right section in the top 3, FAIL}}. That cell is the case the other checks exist for."
+
+[terms]
+"EMNLP" = "E M N L P"
+"SUPPORTED" = "supported"
+"UNSUPPORTED" = "unsupported"
+"PARTIAL" = "partial"
+"VERDICT" = "verdict"
+"nDCG" = "N D C G"
+"lib/prompts.py" = "lib slash prompts dot P Y"
+
+[words]

@@ -1,0 +1,54 @@
+# Chapter checks-in-code's narration (re-check narration): descriptions of its examples, blocks and tables, as
+# [examples.ID], [[blocks]] and [[tables]], and its own readings. Only this chapter's writer edits this file, so
+# writers working in parallel never append to one shared lexicon. A reading every chapter needs goes into
+# narration/lexicon.toml, which wins over a chapter's.
+
+[examples.format-problems-baseline]
+say = "The code runs the format check on the baseline's reply to each item, and counts each kind of problem for the dev items and the held-out items, kept apart. The five kinds are printed with their counts. The baseline has no format problem on the dev items: {{out:format-problems-baseline:dev items with a format problem}}. It has none on the held-out items either: {{out:format-problems-baseline:held-out items with a format problem}}."
+
+[examples.format-problems-variants]
+say = "The code runs the format check and the order check over the unfiltered and second-model replies to the dev items. It counts each kind of problem and lists the items it flags. Then it runs one made-up reply for each kind, and it stops if a kind does not fire. The unfiltered variant's count for answered-declined-expected is {{out:format-problems-variants:unfiltered answered-declined-expected}}. The second model's count for citation-first is {{out:format-problems-variants:second-model citation-first}}."
+
+[examples.check-citation-support]
+say = "The code takes each section ID that a reply cites, for the dev items, in three recordings: the baseline, the unfiltered variant and prompt-b. It sorts each ID into one of four outcomes. Supported means listed for the item. Unlisted means a section of the asked version that the item doesn't list. Wrong-version means a section of another version only, and missing means a section of no version. The baseline's supported share is {{out:check-citation-support:baseline supported}}, and its unlisted share is {{out:check-citation-support:baseline unlisted}}."
+
+[examples.fuzzy-match]
+say = "The code compares three pairs of sablefile answers, with an exact match and with the ratio from difflib's sequence matcher, in both argument orders. For the long pair it also turns autojunk off. The long answer's ratio with the reference first is {{out:fuzzy-match:long answer, ratio}}."
+
+[examples.overlap-misleads]
+say = "The code scores three hand-written pairs of sablefile answers. For each answer it prints ROUGE-1 F1 and a BLEU-style score with no smoothing, from formulas written in the code. It also checks that the wrong answer scores higher on ROUGE-1 F1 in every pair. The check holds in {{out:overlap-misleads:pairs where the wrong answer has the higher ROUGE-1 F1}} pairs."
+
+[terms]
+"BLEU" = "blue"
+"ROUGE-1" = "rouge one"
+"ROUGE-N" = "rouge N"
+"ROUGE" = "rouge"
+"F1" = "F one"
+"difflib" = "diff lib"
+"SequenceMatcher" = "sequence matcher"
+"ratio()" = "ratio"
+"autojunk" = "auto junk"
+"--apply" = "apply flag"
+"sablefile.lock" = "sable file dot lock"
+".sablefile/lock.json" = "dot sable file slash lock dot JSON"
+"json" = "JSON"
+"q-0001" = "q zero zero zero one"
+"q-0004" = "q zero zero zero four"
+"q-0007" = "q zero zero zero seven"
+"q-0018" = "q zero zero one eight"
+"q-0019" = "q zero zero one nine"
+"q-0023" = "q zero zero two three"
+"q-0030" = "q zero zero three oh"
+"q-0034" = "q zero zero three four"
+"q-0036" = "q zero zero three six"
+"q-0039" = "q zero zero three nine"
+"q-0047" = "q zero zero four seven"
+"q-0057" = "q zero zero five seven"
+"q-0058" = "q zero zero five eight"
+"q-0060" = "q zero zero six oh"
+"q-0063" = "q zero zero six three"
+"q-0065" = "q zero zero six five"
+"q-0071" = "q zero zero seven one"
+"q-0080" = "q zero zero eight oh"
+
+[words]

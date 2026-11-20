@@ -1,0 +1,35 @@
+{
+ "script": "recordings/judge_pairs.py",
+ "model": "Qwen/Qwen3-4B-Instruct-2507",
+ "model_version": "unsloth/Qwen3-4B-Instruct-2507-GGUF@a06e946bb6b655725eafa393f4a9745d460374c9 Qwen3-4B-Instruct-2507-Q4_K_M.gguf sha256:3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597",
+ "prompt_sha256": "24a735e79373f7fa0b8bf1210c3e516964d93164508c666b8d333b93c27de992",
+ "judge": "judge-4b",
+ "criterion": "pairwise, VERDICT: A or B, verdict first",
+ "order": "ab",
+ "presented": "response_a as A, response_b as B",
+ "items": 150,
+ "samples": 1,
+ "tuned_on": "nothing",
+ "depends_on": "none (judges the data file only)",
+ "data": "examples/data/helpsteer2/preferences.jsonl",
+ "data_sha256": "1ac7e9da7438784a14915292c1be9649d68429fe7efe7758b5548eb83590358f",
+ "settings": {
+  "model": "Qwen/Qwen3-4B-Instruct-2507",
+  "model_version": "unsloth/Qwen3-4B-Instruct-2507-GGUF@a06e946bb6b655725eafa393f4a9745d460374c9 Qwen3-4B-Instruct-2507-Q4_K_M.gguf sha256:3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597",
+  "licence": "Apache-2.0",
+  "runner": "llama-cpp-python 0.3.36, CPU, 4 threads",
+  "sampling": {
+   "temperature": 0.0,
+   "max_tokens": 160
+  },
+  "seed": 4217,
+  "thinking": "none in this model"
+ },
+ "threads": 4,
+ "seed": 4217,
+ "prompt_text": "lib/prompts.py: PAIR_SYSTEM and PAIR_TEMPLATE",
+ "created": "2026-11-20",
+ "outputs": [
+  "replies.jsonl"
+ ]
+}

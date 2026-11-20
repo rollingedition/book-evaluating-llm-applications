@@ -1,0 +1,23 @@
+# Chapter intervals-and-sample-size's narration (re-check narration): descriptions of its examples, blocks and tables, as
+# [examples.ID], [[blocks]] and [[tables]], and its own readings. Only this chapter's writer edits this file, so
+# writers working in parallel never append to one shared lexicon. A reading every chapter needs goes into
+# narration/lexicon.toml, which wins over a chapter's.
+
+[examples.flip-rate]
+say = "The code counts, for each dev item, how many of its five samples the judge passed, and leaves out any item with an unreadable verdict. It prints how the items fall by number of passes, the flip rate, the mean pass rate across all the samples, and the pass rate of the baseline on the same items. The flip rate is {{out:flip-rate:flip rate}}."
+
+[examples.paired-prompt-b]
+say = "The code runs prompt B against the baseline on the dev items. It leaves out any item with an unreadable verdict under either prompt, and prints each pass rate, the difference between the two with its 95 percent interval, the number of paired items, and how the items split between the two prompts. The difference, prompt B minus the baseline, is {{out:paired-prompt-b:difference, P2 minus P1}}."
+
+[examples.held-out-variants]
+say = "The code compares each of three variants with the baseline on the held-out items, each variant once. It works out the share of the error budget each comparison gets, which sets the level of each interval, and how many resamples lie beyond each end of an interval. For each variant it prints the difference, the interval, the number of paired items and the reading. The reading for prompt B is {{out:held-out-variants:prompt-b minus baseline, reading}}."
+
+[examples.sample-size]
+say = "The code takes the dev items on which prompt B and the baseline both have a readable verdict, and works out the share of items on which the two disagree. From that share it gives the number of items needed to show a five point difference and a ten point difference, with 95 percent confidence and 80 percent power. It also gives the smallest difference that twenty items detect with 80 percent power at 95 percent confidence, assuming a change disagrees with the baseline on about as many items as prompt B did, which is {{out:sample-size:share of discordant items, P2 and P1 disagree}}. It then repeats the calculation using only the sampling noise within each item, as a floor. The share of disagreeing items is {{out:sample-size:share of discordant items, P2 and P1 disagree}}."
+
+[examples.sample-size-limits]
+say = "The code works out the five-point figure one term at a time: the sum of the two z values squared, the variance of one item's paired difference, and the five-point difference squared. It gives a 95 percent interval on the share of disagreeing items, computed the way every interval in the book is, and the items a five-point difference needs at each end of it. It then gives the items needed at the held-out level, and the smallest difference that the {{out:sample-size-limits:held-out items (n)}} held-out items can detect at that level. The interval on that share is {{out:sample-size-limits:discordant share, 95% interval}}."
+
+[terms]
+
+[words]

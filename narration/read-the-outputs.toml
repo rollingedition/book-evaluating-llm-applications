@@ -1,0 +1,35 @@
+# Chapter read-the-outputs's narration (re-check narration): descriptions of its examples, blocks and tables, as
+# [examples.ID], [[blocks]] and [[tables]], and its own readings. Only this chapter's writer edits this file, so
+# writers working in parallel never append to one shared lexicon. A reading every chapter needs goes into
+# narration/lexicon.toml, which wins over a chapter's.
+
+[examples.read-replies-dev]
+say = "The code takes the dev items in order of kind, answerable first, and prints each item's ID, version and question. Under each item it prints the reference answer, then one line per variant: whether the reply declined, what it cited, and the start of its text. A reply that holds the decline phrase inside other text is marked as a phrase, not a decline. Read the lines of an item together to see how the variants differ on the same question."
+
+[examples.tally-failure-modes]
+say = "The code checks the codes against the dev items and the list of modes, so that each reply is counted once. It then prints a table with a row for each mode, the ok row first, and a column for each variant, with a total for each variant, and one labelled line for each count. The label on the counts says the codes were made by the drafting model, as one coder, and are not human labels."
+
+[terms]
+"Qwen3" = "Qwen three"
+"sablefile.lock" = "sable file dot lock"
+"q-0004" = "q zero zero zero four"
+"q-0005" = "q zero zero zero five"
+"q-0011" = "q zero zero one one"
+"q-0018" = "q zero zero one eight"
+"q-0021" = "q zero zero two one"
+"q-0023" = "q zero zero two three"
+"q-0029" = "q zero zero two nine"
+"q-0030" = "q zero zero three oh"
+"q-0034" = "q zero zero three four"
+"q-0036" = "q zero zero three six"
+"q-0039" = "q zero zero three nine"
+"q-0048" = "q zero zero four eight"
+"q-0057" = "q zero zero five seven"
+"q-0080" = "q zero zero eight oh"
+"${project}" = "dollar, brace, project, brace"
+"EvalGen" = "eval gen"
+"--apply" = "apply flag"
+"--quiet" = "quiet flag"
+
+[words]
+"sablefile" = "sable file"

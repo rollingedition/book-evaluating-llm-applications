@@ -1,0 +1,33 @@
+{
+ "script": "recordings/assistant.py",
+ "model": "Qwen/Qwen3-4B-Instruct-2507",
+ "model_version": "unsloth/Qwen3-4B-Instruct-2507-GGUF@a06e946bb6b655725eafa393f4a9745d460374c9 Qwen3-4B-Instruct-2507-Q4_K_M.gguf sha256:3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597",
+ "prompt_sha256": "b25bc841a7dd41783c5637e8fe2d226a56d3f57fb6b9761b36fa8e1ebea1e587",
+ "variant": "prompt-b",
+ "items": 120,
+ "runs": 1,
+ "k": 3,
+ "filtered": true,
+ "show_version": false,
+ "retrieval": "bm25s 0.3.16, BM25 k1=1.5 b=0.75, stopwords en, ranked by (-score, section_id, version)",
+ "settings": {
+  "model": "Qwen/Qwen3-4B-Instruct-2507",
+  "model_version": "unsloth/Qwen3-4B-Instruct-2507-GGUF@a06e946bb6b655725eafa393f4a9745d460374c9 Qwen3-4B-Instruct-2507-Q4_K_M.gguf sha256:3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597",
+  "licence": "Apache-2.0",
+  "runner": "llama-cpp-python 0.3.36, CPU, 4 threads",
+  "sampling": {
+   "temperature": 0.0,
+   "max_tokens": 160
+  },
+  "seed": 4217,
+  "thinking": "none in this model"
+ },
+ "testset": "testset.jsonl",
+ "testset_sha256": "569e91126db989192d1d3f4f79e6ccc675b446b2d31bea2640792039a0117449",
+ "tuned_on": "nothing",
+ "threads": 4,
+ "created": "2026-11-20",
+ "outputs": [
+  "replies.jsonl"
+ ]
+}

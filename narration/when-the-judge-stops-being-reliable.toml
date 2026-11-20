@@ -1,0 +1,20 @@
+# Chapter when-the-judge-stops-being-reliable's narration (re-check narration): descriptions of its examples, blocks and tables, as
+# [examples.ID], [[blocks]] and [[tables]], and its own readings. Only this chapter's writer edits this file, so
+# writers working in parallel never append to one shared lexicon. A reading every chapter needs goes into
+# narration/lexicon.toml, which wins over a chapter's.
+
+[examples.position-flips]
+say = "The code judges each human-rated pair in both orders, and sorts each pair as consistent, order-changed (labelled flipped in the output), tie or unreadable, split by dev and held-out. It then prints which position won both orders for the order-changed pairs. Over both splits, the first position's share of the order changes is {{out:position-flips:flipped, first position won both orders, both splits}}, with an interval of {{out:position-flips:first-position share interval, both splits}}. On dev, the share is {{out:position-flips:flipped, first position won both orders, dev}}, and on held-out it is {{out:position-flips:flipped, first position won both orders, held-out}}. The last two lines give agreement with the human on the consistent pairs of each split."
+
+[examples.length-and-verdicts]
+say = "The code takes the dev replies that the baseline assistant answered, sorts them into three bands by word count, and prints the judge's pass rate for each band. The bands change at {{out:length-and-verdicts:band edges, in words}} words. Declined replies are left out, {{out:length-and-verdicts:declined, left out}}. An unreadable verdict is printed and left out, never counted as a fail, and here it is on {{out:length-and-verdicts:unreadable verdict, left out}}. The shortest band passed {{out:length-and-verdicts:under 15 words}}. The middle band passed {{out:length-and-verdicts:15 to 29 words}}. The longest band passed {{out:length-and-verdicts:30 words or more}}."
+
+[examples.verdict-limits]
+say = "The code prints the judge's limits as one labelled line each. The first is the order-change rate, the share of pairs whose verdict follows the order they were shown in: {{out:verdict-limits:order-change rate}}. Next is the length gap, the longest band minus the shortest, which is {{out:verdict-limits:length gap, longest band minus shortest band}}. Its method is {{out:verdict-limits:length gap method}}. Then come the unreadable verdicts across five answer-judge recordings, {{out:verdict-limits:unreadable verdicts, five answer-judge recordings}}, and the most any one recording lost, {{out:verdict-limits:most unreadable in one recording}}. The same-model line counts the recordings in which the judge and the assistant are the same model: {{out:verdict-limits:same-model recordings}}. The last lines compare the second model's pass rate with the baseline's on the same dev items."
+
+[terms]
+"q-0043" = "q zero zero four three"
+"GPT-4" = "G P T four"
+"ChatGPT" = "Chat G P T"
+"LLM" = "L L M"
+"arXiv" = "archive"

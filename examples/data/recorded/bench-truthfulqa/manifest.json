@@ -1,0 +1,31 @@
+{
+ "script": "recordings/bench.py",
+ "model": "Qwen/Qwen3-4B-Instruct-2507",
+ "model_version": "unsloth/Qwen3-4B-Instruct-2507-GGUF@a06e946bb6b655725eafa393f4a9745d460374c9 Qwen3-4B-Instruct-2507-Q4_K_M.gguf sha256:3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597",
+ "prompt_sha256": "1c7c1f63c3eb31f1c3030c5e0d184890cbcb72bb887a32d0eda42fd901c10c3c",
+ "bench": "truthfulqa",
+ "items": 100,
+ "samples": 1,
+ "tuned_on": "nothing",
+ "data": "examples/data/truthfulqa/mc1.jsonl",
+ "data_sha256": "3767909700e718889c44d4e0e857842547f28183f2522f136cdbeba2085904e9",
+ "settings": {
+  "model": "Qwen/Qwen3-4B-Instruct-2507",
+  "model_version": "unsloth/Qwen3-4B-Instruct-2507-GGUF@a06e946bb6b655725eafa393f4a9745d460374c9 Qwen3-4B-Instruct-2507-Q4_K_M.gguf sha256:3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597",
+  "licence": "Apache-2.0",
+  "runner": "llama-cpp-python 0.3.36, CPU, 4 threads",
+  "sampling": {
+   "temperature": 0.0,
+   "max_tokens": 160
+  },
+  "seed": 4217,
+  "thinking": "none in this model"
+ },
+ "threads": 4,
+ "seed": 4217,
+ "prompt_text": "lib/prompts.py: BENCH_TQA_SYSTEM and BENCH_TQA_TEMPLATE",
+ "created": "2026-11-20",
+ "outputs": [
+  "replies.jsonl"
+ ]
+}

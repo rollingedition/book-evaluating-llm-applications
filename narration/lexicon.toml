@@ -1,0 +1,25 @@
+# The book's shared spoken readings (narration/lexicon.toml, audio.md). [terms] are exact, case-sensitive replacements
+# as the text writes them; [words] are whole words in any case. A reading here wins over a chapter's. Only the
+# managing editor edits this file; a reading one chapter needs stays in that chapter's narration file.
+
+[terms]
+"sablefile.lock" = "sable file dot lock"
+"sablefile.toml" = "sable file dot toml"
+".sablefile/lock.json" = "dot sable file slash lock dot JSON"
+"--apply" = "apply flag"
+"${project}" = "dollar, brace, project, brace"
+"BM25" = "B M twenty-five"
+"P1" = "P one"
+"P2" = "P two"
+"prompt-b" = "prompt B"
+"k5" = "k five"
+"Qwen3-0.6B" = "Qwen three, zero point six B"
+"Qwen3-4B-Instruct-2507" = "Qwen three, four B, Instruct, twenty-five oh seven"
+"Qwen3-4B" = "Qwen three, four B"
+"Qwen3" = "Qwen three"
+"GGUF" = "G G U F"
+"q-0030" = "q zero zero three zero"
+"q-0080" = "q zero zero eight zero"
+
+[words]
+"sablefile" = "sable file"

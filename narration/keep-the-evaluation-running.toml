@@ -1,0 +1,32 @@
+# Chapter keep-the-evaluation-running's narration (re-check narration): descriptions of its examples, blocks and tables, as
+# [examples.ID], [[blocks]] and [[tables]], and its own readings. Only this chapter's writer edits this file, so
+# writers working in parallel never append to one shared lexicon. A reading every chapter needs goes into
+# narration/lexicon.toml, which wins over a chapter's.
+
+[examples.gate-real-drop]
+say = "The code reads the baseline's dev verdicts and the second model's, leaves out any item whose verdict was not readable under either run, and compares the two over the rest. It prints both pass rates with their counts, the paired difference, its interval, the threshold and the decision. The gate fails only when the upper bound of the interval is below minus the threshold. Here the baseline passes {{out:gate-real-drop:baseline pass rate}}, and the second model passes {{out:gate-real-drop:second-model pass rate}}. The difference is {{out:gate-real-drop:difference, second-model minus baseline}}, with an interval of {{out:gate-real-drop:95% interval of the difference}}. The upper bound is {{out:gate-real-drop:upper bound of the interval}}, and the threshold is {{out:gate-real-drop:threshold}}. So the decision reads: {{out:gate-real-drop:decision}}."
+
+[examples.flaky-items]
+say = "The code reads each dev item's five verdicts from the variance set. The assistant sampled five replies to each item at temperature 0.7, and the judge graded each reply once at temperature 0, so an item flips when its replies get different verdicts. The code lists the items whose verdicts differ, with their PASS counts out of five, and prints the rule that governs them: flagged, never edited or deleted. An item with an unreadable verdict is named and left out, not flagged. Here, {{out:flaky-items:flagged items}} of the {{out:flaky-items:dev items compared (n)}} dev items compared are flagged. Across its five replies, the verdicts on q zero zero four seven are {{out:flaky-items:q-0047}}. The verdicts on q zero zero five eight are {{out:flaky-items:q-0058}}. The item q zero zero four three is left out, since its verdict was unreadable in {{out:flaky-items:left out, unreadable verdict, q-0043}}."
+
+[examples.own-tests-run]
+say = "The code runs the evaluation's own tests and counts the passed and failed outcomes for each module, then prints the total and pytest's exit code. The table in the chapter gives each module's result. The total is {{out:own-tests-run:total}}. The exit code is {{out:own-tests-run:pytest exit code}}. An exit code of 0 means every test was collected and passed. An exit code of 5 would mean that no tests were collected at all, and the example prints the code so that such a run cannot pass unnoticed. The output has no timings and no paths."
+
+[examples.feedback-table]
+say = "The code draws a vote for each dev item from a stated model with a fixed seed, not from users, and prints the rows as a table of item and vote. It is a teaching device. Of the {{out:feedback-table:dev items}} dev items, {{out:feedback-table:items with a vote}} got a vote, and {{out:feedback-table:items nobody voted on}} got none. Among the votes cast, the share of thumbs-down is {{out:feedback-table:thumbs-down among those who voted}}, and the share of thumbs-up is {{out:feedback-table:thumbs-up among those who voted}}. The last lines say what the table can show, which is the share of each kind of vote with its count, and what it cannot show, which is whether an answer was right."
+
+[[tables]]
+section = "the-evaluations-own-tests"
+starts = "| Module |"
+say = "A table with one row for each of the evaluation's thirteen test modules. Each row gives what the module tests and how many of its tests passed and failed. Read it as a check on the scoring code, not on the assistant."
+
+[terms]
+"pytest" = "pie test"
+"Inspect AI" = "Inspect A I"
+"CI" = "C I"
+"Qwen3-0.6B" = "Qwen three point six B"
+"q-0047" = "q zero zero four seven"
+"q-0058" = "q zero zero five eight"
+"q-0043" = "q zero zero four three"
+
+[words]

@@ -1,0 +1,33 @@
+{
+ "script": "recordings/judge_helpsteer2_rubric_b.py",
+ "model": "Qwen/Qwen3-4B-Instruct-2507",
+ "model_version": "unsloth/Qwen3-4B-Instruct-2507-GGUF@a06e946bb6b655725eafa393f4a9745d460374c9 Qwen3-4B-Instruct-2507-Q4_K_M.gguf sha256:3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597",
+ "prompt_sha256": "7f512725080e8e78437603f7445a0480caaa0d2a344aa51d58d5475cba2ac384",
+ "judge": "judge-4b",
+ "criterion": "correctness, reference-free, second wording, PASS or FAIL",
+ "items": 90,
+ "samples": 1,
+ "tuned_on": "nothing",
+ "split": "dev",
+ "data": "examples/data/helpsteer2/ratings.jsonl",
+ "data_sha256": "bc031e14fca6657b246e6843fb2c6260d488d99ea09486a98c65323b60beb862",
+ "settings": {
+  "model": "Qwen/Qwen3-4B-Instruct-2507",
+  "model_version": "unsloth/Qwen3-4B-Instruct-2507-GGUF@a06e946bb6b655725eafa393f4a9745d460374c9 Qwen3-4B-Instruct-2507-Q4_K_M.gguf sha256:3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597",
+  "licence": "Apache-2.0",
+  "runner": "llama-cpp-python 0.3.36, CPU, 4 threads",
+  "sampling": {
+   "temperature": 0.0,
+   "max_tokens": 160
+  },
+  "seed": 4217,
+  "thinking": "none in this model"
+ },
+ "threads": 4,
+ "seed": 4217,
+ "prompt_text": "lib/prompts.py: HS2B_SYSTEM and HS2B_TEMPLATE",
+ "created": "2026-11-20",
+ "outputs": [
+  "replies.jsonl"
+ ]
+}

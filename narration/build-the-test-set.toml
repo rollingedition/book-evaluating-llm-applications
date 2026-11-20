@@ -1,0 +1,40 @@
+# Chapter build-the-test-set's narration (re-check narration): descriptions of its examples, blocks and tables, as
+# [examples.ID], [[blocks]] and [[tables]], and its own readings. Only this chapter's writer edits this file, so
+# writers working in parallel never append to one shared lexicon. A reading every chapter needs goes into
+# narration/lexicon.toml, which wins over a chapter's.
+
+[examples.check-item-schema]
+say = "The code loads all {{out:check-item-schema:items}} items, runs the row rules and the rules across items, and prints the problem count, which is {{out:check-item-schema:problems}}. Then it counts items by kind. Answerable: {{out:check-item-schema:kind answerable}}. Unanswerable: {{out:check-item-schema:kind unanswerable}}. Version-dependent: {{out:check-item-schema:kind version-dependent}}. Ambiguous: {{out:check-item-schema:kind ambiguous}}. Dev holds {{out:check-item-schema:split dev}} items, held-out holds {{out:check-item-schema:split held-out}}, and {{out:check-item-schema:planted}} items are planted."
+
+[examples.kinds-by-split]
+say = "The code prints a table of counts. Its first part gives each of the four kinds, split into dev and held-out, with a total for each row and column. Its second part gives the planted items by their reason, split the same way. The last line gives the item count, {{out:kinds-by-split:items}}. Read the columns as the split the design asks for: each row adds up across the two splits to its total."
+
+[examples.behaviour-coverage]
+say = "The code counts the items that exercise each of the six behaviours, from a mapping that lists every item once. B one has {{out:behaviour-coverage:B1 items}} items, B two {{out:behaviour-coverage:B2 items}}, B three {{out:behaviour-coverage:B3 items}}, B four {{out:behaviour-coverage:B4 items}}, B five {{out:behaviour-coverage:B5 items}}, and B six {{out:behaviour-coverage:B6 items}}. The rest carry no behaviour: {{out:behaviour-coverage:items with no behaviour}} of the {{out:behaviour-coverage:items}} items. Those items still count in every rate."
+
+[examples.score-gsm8k]
+say = "The code reads each reply's final number and compares it with the reference answer by exact match. It prints the count of readable replies, the accuracy and an interval for the accuracy. Readable replies: {{out:score-gsm8k:readable}}. Accuracy: {{out:score-gsm8k:accuracy}}. The interval: {{out:score-gsm8k:accuracy interval}}. Then it counts the replies with no line that reads Final answer. Over all items: {{out:score-gsm8k:no final answer line}}. Among the wrong ones: {{out:score-gsm8k:no final answer line among wrong}}. Among the right ones: {{out:score-gsm8k:no final answer line among right}}. The token cap is {{out:score-gsm8k:token cap}}. The last lines show one wrong reply. The parser read {{out:score-gsm8k:wrong parsed}}, and the reference answer is {{out:score-gsm8k:wrong reference}}."
+
+[examples.score-truthfulqa]
+say = "The code reads the option letter on each reply's first line and compares it with the correct letter. It prints the count of readable replies, the accuracy and an interval for the accuracy. Then it prints two lines to compare. The correct option is first in: {{out:score-truthfulqa:correct option first}}. The reply chose the first option in: {{out:score-truthfulqa:chose first option}}. A random choice would pick the first option at: {{out:score-truthfulqa:chance first option}}. Readable replies: {{out:score-truthfulqa:readable}}. Accuracy: {{out:score-truthfulqa:accuracy}}. The interval: {{out:score-truthfulqa:accuracy interval}}. Unreadable replies: {{out:score-truthfulqa:unreadable}}. The token cap is {{out:score-truthfulqa:token cap}}."
+
+[examples.score-truthfulqa-shuffled]
+say = "The code gives each item's options a seeded random order, so the correct option is first only by chance, and scores the replies again. It prints the count of readable replies, the accuracy and an interval for the accuracy. Readable replies: {{out:score-truthfulqa-shuffled:readable, shuffled options}}. Accuracy: {{out:score-truthfulqa-shuffled:accuracy, shuffled options}}. The interval: {{out:score-truthfulqa-shuffled:accuracy interval, shuffled options}}. Then it prints the share of replies that chose the first option, and the share a random choice would pick: {{out:score-truthfulqa-shuffled:chose first option}} and {{out:score-truthfulqa-shuffled:chance first option}}. Last, it compares each item with the unshuffled run. Paired items: {{out:score-truthfulqa-shuffled:paired items}}. The difference, shuffled minus unshuffled: {{out:score-truthfulqa-shuffled:difference, shuffled minus unshuffled}}. Its interval: {{out:score-truthfulqa-shuffled:95% interval of the difference}}."
+
+[terms]
+"GSM8K" = "G S M eight K"
+"TruthfulQA" = "Truthful Q A"
+"MC1" = "M C one"
+"Q4_K_M" = "Q four K M"
+"B1" = "B one"
+"B2" = "B two"
+"B3" = "B three"
+"B4" = "B four"
+"B5" = "B five"
+"B6" = "B six"
+"Apache-2.0" = "Apache two point oh"
+"MIT" = "M I T"
+"####" = "four hashes"
+
+[words]
+"gsm8k" = "G S M eight K"
