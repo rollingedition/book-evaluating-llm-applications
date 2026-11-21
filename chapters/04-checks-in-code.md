@@ -24,6 +24,8 @@ Here is chapter 2's list of modes, each with what a code check can see of it.
 - **Citation problems.** Visible in two parts: a citation outside the prompt, and a citation to a section the item doesn't list. The second part needs a reader, as [the support section](#citation-support) explains.
 - **Malformed replies.** Partly. Empty replies, declines with text, uncited answers and replies whose parts come out in the wrong order can be found. The order check in the next section finds the last kind.
 
+A program can also do a judge's work when the rule it applies can be written down. In the preprint [*Can Programs Replace LLM Judges?*](https://arxiv.org/abs/2611.24849) (arXiv 2611.24849, v1, read on 21 November 2026), Agichtein and colleagues have a frontier model turn relevance guidelines into one program per topic, for a task this book leaves to other books: labelling which documents answer a search. The authors report that on TREC DL 2019 to 2021 these programs agree with the NIST assessors at the level of Claude Sonnet 5.5 used as a judge. A program like that is written once, gives the same answer on every run and can be read line by line, which are the strengths this section claims for a code check.
+
 **Working rule:** Write a code check for a failure only when the reply and the item already hold the fact the check needs. For a failure whose evidence is the claim itself, send it to a judge with a written rubric, as [chapter 5](a-judge-with-a-rubric) does, and keep the code check for the parts of the failure that can be read.
 
 ## Format checks {#format-checks}
