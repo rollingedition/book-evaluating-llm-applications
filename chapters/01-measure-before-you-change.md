@@ -126,7 +126,7 @@ A pass rate is a count divided by a denominator, and the denominator decides wha
 pass rate = passed items / items
 ```
 
-An interval answers a different question: how far would the rate move if the set had been another twenty items drawn the same way? The method is a percentile bootstrap. The bootstrap itself is Efron's: his 1979 paper [*Bootstrap Methods: Another Look at the Jackknife*](https://doi.org/10.1214/aos/1176344552), in the *Annals of Statistics*, set out resampling as a way to estimate how much a statistic varies. This chapter uses the simplest interval built on resampling, the middle 95% of the resampled rates. The procedure draws items from the set with replacement, without regard to kind, so one draw can hold any mix of kinds. It computes the pass rate of each draw, and repeats the draws many times. The interval shows how much twenty items could say.
+An interval answers a different question from the pass rate: how far would the rate move if the set had been another twenty items drawn the same way? The method is a percentile bootstrap. The bootstrap itself is Efron's: his 1979 paper [*Bootstrap Methods: Another Look at the Jackknife*](https://doi.org/10.1214/aos/1176344552), in the *Annals of Statistics*, set out resampling as a way to estimate how much a statistic varies. The percentile bootstrap is the simplest interval built on resampling, the middle 95% of the resampled rates. The procedure draws items from the set with replacement, without regard to kind, so one draw can hold any mix of kinds. It computes the pass rate of each draw, and repeats the draws many times. The interval shows how much twenty items could say.
 
 Compute the rate and its interval for the baseline, then break the rate down by kind.
 
@@ -144,7 +144,7 @@ The interval covers only the spread that comes from drawing items. It says nothi
 
 ## Two prompts {#two-prompts}
 
-The team's proposed prompt is the change to measure. P1 is the baseline prompt. P2 keeps the same ground rules and changes the form of the reply: it asks the model to quote first the sentence its answer relies on, then give the answer, with the citation on each line. The question is whether the quote helps. Two pass rates over different items mostly measure the items, so the comparison has to pass the same items through both prompts. Each item then gets two verdicts, and the difference is taken item by item. That's a paired comparison.
+The team's proposed prompt is the change to measure. P1 is the baseline prompt. P2 keeps the same ground rules and changes the form of the reply: it asks the model to quote first the sentence its answer relies on, then give the answer, with the citation on each line. The question is whether the quote helps. Two pass rates over different items mostly measure the items, so the comparison has to pass the same items through both prompts. Each item then gets two verdicts, and the difference is taken item by item. That's a [paired comparison](#paired-comparisons).
 
 Both prompts run over the same twenty items, and the output reports the difference with its interval.
 
@@ -152,7 +152,7 @@ Both prompts run over the same twenty items, and the output reports the differen
 
 On this set the two prompts tie. P1 passes {{out:compare-two-prompts:P1 (baseline) pass rate}} of the items, and P2 passes {{out:compare-two-prompts:P2 (prompt-b) pass rate}}.
 
-The paired view shows what sits under the tie. P2 passes {{out:compare-two-prompts:items that P2 passes and P1 fails}} item that P1 fails, and P1 passes {{out:compare-two-prompts:items that P1 passes and P2 fails}} item that P2 fails. These are the judge's verdicts, not facts about the prompts. The first is `q-0019`, and the judge's PASS on it breaks the judge's own rule 3. The difference, P2 minus P1, is {{out:compare-two-prompts:difference, P2 minus P1}}, and its interval is {{out:compare-two-prompts:95% interval of the difference}}. The interval includes zero, so at this size the example reports no difference detected.
+The paired view shows what sits under the tie. P2 passes {{out:compare-two-prompts:items that P2 passes and P1 fails}} item that P1 fails, and P1 passes {{out:compare-two-prompts:items that P1 passes and P2 fails}} item that P2 fails. These are the judge's verdicts, not facts about the prompts. The first is `q-0019`, and the judge's PASS on it breaks the judge's own rule 3. The difference, P2 minus P1, is {{out:compare-two-prompts:difference, P2 minus P1}}, and its interval is {{out:compare-two-prompts:95% interval of the difference}}. The interval includes zero, so at this size the example reports [no difference detected](#paired-comparisons).
 
 Here the judge's verdicts on `q-0019` are read under both prompts, and the rule the PASS breaks is printed beside them.
 
