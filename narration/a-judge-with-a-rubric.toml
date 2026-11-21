@@ -18,6 +18,7 @@ starts = "You grade whether an AI assistant's reply to a user is right."
 say = "Rubric B's instruction paragraph and its reply form, quoted as they are written. The rubric has two made-up examples as well, which the chapter leaves out. It tells the judge that a reply is right when every fact and result in it is correct, and that a reply making no false claim is right even when it is short or incomplete. It also says to grade no style, length or tone, and to answer with the verdict on the first line."
 
 [terms]
+"EACL" = "E A C L"
 "HelpSteer2" = "help steer two"
 "parse_verdict" = "parse verdict"
 "hs2-pref-0003" = "H S two pref zero zero zero three"

@@ -19,6 +19,9 @@ say = "The code compares three pairs of sablefile answers, with an exact match a
 say = "The code scores three hand-written pairs of sablefile answers. For each answer it prints ROUGE-1 F1 and a BLEU-style score with no smoothing, from formulas written in the code. It also checks that the wrong answer scores higher on ROUGE-1 F1 in every pair. The check holds in {{out:overlap-misleads:pairs where the wrong answer has the higher ROUGE-1 F1}} pairs."
 
 [terms]
+"TREC" = "treck"
+"DL" = "D L"
+"NIST" = "nist"
 "BLEU" = "blue"
 "ROUGE-1" = "rouge one"
 "ROUGE-N" = "rouge N"
