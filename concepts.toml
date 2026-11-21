@@ -23,6 +23,9 @@ definition = "Answerable items have their answer on the page."
 section = "the-twenty-items"
 example = "twenty-questions"
 
+[concepts.relations]
+broader = ["item"]
+
 [[concepts]]
 id = "unanswerable-item"
 term = "unanswerable item"
@@ -30,6 +33,7 @@ context = "llm-evaluation"
 definition = "Unanswerable items ask about something the docs don't cover, and the right reply is the decline."
 section = "the-twenty-items"
 example = "twenty-questions"
+agrees = [{ book = "business-intelligence-with-agents", definition = "An unanswerable question, such as the cost of shipping, asks for data the warehouse doesn't hold, and the agent should say so." }]
 
 [concepts.relations]
 contrasts-with = ["answerable-item"]
@@ -41,6 +45,9 @@ context = "llm-evaluation"
 definition = "Version-dependent items have an answer that changes from one version to the next"
 section = "the-twenty-items"
 example = "twenty-questions"
+
+[concepts.relations]
+broader = ["item"]
 
 [[concepts]]
 id = "twin"
@@ -58,6 +65,9 @@ definition = "Ambiguous items could mean two things, and their reference answer 
 section = "the-twenty-items"
 example = "twenty-questions"
 
+[concepts.relations]
+broader = ["item"]
+
 [[concepts]]
 id = "planted-item"
 term = "planted item"
@@ -74,9 +84,11 @@ definition = "The index is built with BM25, which scores each section by the wor
 section = "retrieve-then-answer"
 example = "retrieve-top-sections"
 applies_to = ["bm25s"]
+wikidata = "Q2068750"
 
 [concepts.relations]
 implemented-by = [{ to = "bm25s", versions = ">=0.3" }]
+same-as = ["https://rollingedition.com/concepts/search-and-recommendation/bm25"]
 
 [[concepts]]
 id = "recording"
@@ -85,6 +97,9 @@ context = "llm-evaluation"
 definition = "The recording is a folder of replies, one per item."
 section = "replay-the-answers"
 example = "replay-one-answer"
+
+[concepts.relations]
+same-as = ["https://rollingedition.com/concepts/artificial-intelligence/recording"]
 
 [[concepts]]
 id = "citation-form"
@@ -117,13 +132,16 @@ example = "check-declines"
 [[concepts]]
 id = "false-refusal"
 term = "false refusal"
+aliases = ["over-declining"]
 context = "llm-evaluation"
 definition = "A false refusal is an answerable item declined"
 section = "declines-in-code"
 example = "check-declines"
+agrees = [{ book = "business-intelligence-with-agents", definition = "A declined answer says it can't answer a question that has an answer." }]
 
 [concepts.relations]
 contrasts-with = ["false-answer"]
+broader = ["failure-mode"]
 
 [[concepts]]
 id = "false-answer"
@@ -140,6 +158,10 @@ context = "llm-evaluation"
 definition = "a judge: a model that reads the question, a written reference answer and the assistant's reply, and returns PASS or FAIL"
 section = "one-judge"
 example = "judge-one-answer"
+agrees = [{ book = "business-intelligence-with-agents", definition = "a judge, a model call that grades an answer against a rubric and returns a verdict" }]
+
+[concepts.relations]
+close-to = ["https://rollingedition.com/concepts/search-and-recommendation/judge"]
 
 [[concepts]]
 id = "pass-rate"
@@ -149,6 +171,9 @@ definition = "A pass rate is a count divided by a denominator"
 formula = "pass rate = passed items / items"
 section = "a-pass-rate-and-its-interval"
 example = "pass-rate-interval"
+
+[concepts.relations]
+computed-from = ["item"]
 
 [[concepts]]
 id = "interval"
@@ -160,6 +185,7 @@ example = "pass-rate-interval"
 
 [concepts.relations]
 computed-from = ["pass-rate"]
+close-to = ["https://rollingedition.com/concepts/search-and-recommendation/confidence-interval"]
 
 [[concepts]]
 id = "percentile-bootstrap"
@@ -170,6 +196,7 @@ example = "pass-rate-interval"
 
 [concepts.relations]
 broader = ["interval"]
+same-as = ["https://rollingedition.com/concepts/search-and-recommendation/percentile-interval"]
 
 [[concepts]]
 id = "paired-comparison"
@@ -180,6 +207,7 @@ example = "paired-prompt-b"
 
 [concepts.relations]
 contrasts-with = ["unpaired-comparison"]
+close-to = ["https://rollingedition.com/concepts/search-and-recommendation/paired-test"]
 
 [[concepts]]
 id = "dev"
@@ -191,6 +219,7 @@ section = "read-the-outputs"
 
 [concepts.relations]
 part-of = ["test-set"]
+close-to = ["https://rollingedition.com/concepts/artificial-intelligence/validation-split"]
 
 [[concepts]]
 id = "baseline"
@@ -200,6 +229,9 @@ definition = "The baseline is the setup chapter 1 measured."
 section = "what-the-replies-look-like"
 example = "read-replies-dev"
 
+[concepts.relations]
+close-to = ["https://rollingedition.com/concepts/artificial-intelligence/baseline"]
+
 [[concepts]]
 id = "unfiltered-variant"
 term = "unfiltered variant"
@@ -207,6 +239,9 @@ context = "llm-evaluation"
 definition = "The unfiltered variant drops the baseline's version filter."
 section = "what-the-replies-look-like"
 example = "read-replies-dev"
+
+[concepts.relations]
+contrasts-with = ["baseline"]
 
 [[concepts]]
 id = "second-model-variant"
@@ -216,6 +251,9 @@ context = "llm-evaluation"
 definition = "The second-model variant keeps the baseline's prompt and hands the answer to a smaller model, Qwen3 with 0.6 billion parameters in an 8-bit build."
 section = "what-the-replies-look-like"
 example = "read-replies-dev"
+
+[concepts.relations]
+contrasts-with = ["baseline"]
 
 [[concepts]]
 id = "reference-answer"
@@ -237,6 +275,9 @@ definition = "a planted near-miss term, a name close to one the docs use, which 
 section = "what-the-replies-look-like"
 example = "read-replies-dev"
 
+[concepts.relations]
+part-of = ["planted-item"]
+
 [[concepts]]
 id = "failure-mode"
 term = "failure mode"
@@ -256,16 +297,6 @@ context = "llm-evaluation"
 definition = "a reply with no defect got `ok`."
 section = "coding-the-failures"
 example = "tally-failure-modes"
-
-[[concepts]]
-id = "over-declining"
-term = "over-declining"
-context = "llm-evaluation"
-definition = "An over-declining reply declines an item the docs answer."
-section = "over-declining"
-
-[concepts.relations]
-broader = ["failure-mode"]
 
 [[concepts]]
 id = "wrong-version-answer"
@@ -294,6 +325,9 @@ context = "llm-evaluation"
 definition = "a candidate has four parts: the mode, the input the check reads, the claim it tests, and what it can't see."
 section = "from-a-failure-to-a-check"
 
+[concepts.relations]
+contrasts-with = ["code-check"]
+
 [[concepts]]
 id = "item"
 term = "item"
@@ -320,6 +354,7 @@ term = "kind"
 context = "llm-evaluation"
 definition = "Each item also has a kind, which says what a correct reply looks like."
 section = "what-a-test-set-is-for"
+agrees = [{ book = "business-intelligence-with-agents", definition = "A golden question's kind says what a right answer looks like: answer when the warehouse can answer it, decline when it can't, and forbidden when the role may not see the answer." }]
 
 [concepts.relations]
 part-of = ["item"]
@@ -350,6 +385,9 @@ context = "llm-evaluation"
 definition = "`false-premise`: the question asks about a flag or key that the asked version does not have."
 section = "planted-items"
 
+[concepts.relations]
+part-of = ["planted-item"]
+
 [[concepts]]
 id = "version-swap"
 term = "version swap"
@@ -357,6 +395,9 @@ aliases = ["version-swap"]
 context = "llm-evaluation"
 definition = "`version-swap`: the question uses another version's wording, so an assistant that matches wording answers for that version."
 section = "planted-items"
+
+[concepts.relations]
+part-of = ["planted-item"]
 
 [[concepts]]
 id = "stale-answer"
@@ -366,6 +407,9 @@ context = "llm-evaluation"
 definition = "`stale-answer`: the answer sits under a section ID that a version filter removes, so a filter that is too strict misses it."
 section = "planted-items"
 
+[concepts.relations]
+part-of = ["planted-item"]
+
 [[concepts]]
 id = "ambiguous-target"
 term = "ambiguous target"
@@ -374,6 +418,9 @@ context = "llm-evaluation"
 definition = "`ambiguous-target`: a pronoun or a phrase such as \"the file\" has no clear referent without the sections."
 section = "planted-items"
 
+[concepts.relations]
+part-of = ["planted-item"]
+
 [[concepts]]
 id = "held-out"
 term = "held-out"
@@ -381,10 +428,12 @@ aliases = ["held-out items"]
 context = "llm-evaluation"
 definition = "held-out is used once, to report a result."
 section = "dev-and-held-out"
+agrees = [{ book = "business-intelligence-with-agents", definition = "A held-out split is the usual defence: tune on one part, and score the other only when you report a result." }]
 
 [concepts.relations]
 contrasts-with = ["dev"]
 part-of = ["test-set"]
+same-as = ["https://rollingedition.com/concepts/artificial-intelligence/test-split"]
 
 [[concepts]]
 id = "stratified-split"
@@ -398,6 +447,7 @@ term = "public benchmark"
 context = "llm-evaluation"
 definition = "A public benchmark is a set of questions and answers someone else published."
 section = "public-benchmarks"
+agrees = [{ book = "business-intelligence-with-agents", definition = "A public benchmark for text-to-SQL or data agents gives you questions, a database and a gold answer for each question, and a score that others have reported on the same set." }]
 
 [[concepts]]
 id = "gsm8k"
@@ -406,6 +456,7 @@ context = "llm-evaluation"
 definition = "GSM8K is grade-school math word problems, each with a worked solution that ends in one number."
 section = "gsm8k"
 example = "score-gsm8k"
+wikidata = "Q121360456"
 
 [concepts.relations]
 broader = ["public-benchmark"]
@@ -417,6 +468,7 @@ context = "llm-evaluation"
 definition = "TruthfulQA asks questions on which people often answer falsely, such as a common myth."
 section = "truthfulqa"
 example = "score-truthfulqa"
+wikidata = "Q125938013"
 
 [concepts.relations]
 broader = ["public-benchmark"]
@@ -600,6 +652,10 @@ term = "BLEU"
 definition = "Papineni and colleagues proposed BLEU in 2002 as a quick and inexpensive way to score machine translation."
 section = "where-bleu-rouge-mislead"
 example = "overlap-misleads"
+wikidata = "Q3500773"
+
+[concepts.relations]
+contrasts-with = ["rouge-n"]
 
 [[concepts]]
 id = "rouge-n"
@@ -624,6 +680,10 @@ term = "F1"
 definition = "F1, which combines recall with precision"
 section = "where-bleu-rouge-mislead"
 example = "overlap-misleads"
+wikidata = "Q6975395"
+
+[concepts.relations]
+contrasts-with = ["rouge-n"]
 
 [[concepts]]
 id = "rubric"
@@ -641,6 +701,7 @@ section = "a-judge-with-a-rubric"
 
 [concepts.relations]
 part-of = ["rubric"]
+close-to = ["https://rollingedition.com/concepts/large-language-models/system-message"]
 
 [[concepts]]
 id = "template"
@@ -774,15 +835,20 @@ definition = "Agreement is the share of rows on which the judge and the human gi
 section = "agreement-and-kappa"
 example = "calibration-agreement"
 
+[concepts.relations]
+same-as = ["https://rollingedition.com/concepts/search-and-recommendation/observed-agreement"]
+
 [[concepts]]
 id = "kappa"
 term = "kappa"
 definition = "For two raters on pass or fail, kappa is the observed agreement minus the chance agreement, divided by one minus the chance agreement."
 section = "agreement-and-kappa"
 example = "calibration-agreement"
+wikidata = "Q1107106"
 
 [concepts.relations]
 computed-from = ["agreement"]
+close-to = ["https://rollingedition.com/concepts/search-and-recommendation/cohens-kappa", "https://rollingedition.com/concepts/llm-evaluation/cohens-kappa"]
 
 [[concepts]]
 id = "paired-difference"
@@ -790,6 +856,9 @@ term = "paired difference"
 definition = "The paired difference is rubric B's score minus rubric A's, averaged over the dev rows"
 section = "agreement-and-kappa"
 example = "rubric-b-agreement"
+
+[concepts.relations]
+close-to = ["https://rollingedition.com/concepts/llm-evaluation/paired-difference"]
 
 [[concepts]]
 id = "true-positive-rate"
@@ -799,6 +868,10 @@ context = "llm-evaluation"
 definition = "The true positive rate, TPR, is the share of human PASS rows that the judge passes."
 section = "tpr-and-tnr"
 example = "tpr-tnr"
+wikidata = "Q6842789"
+
+[concepts.relations]
+close-to = ["https://rollingedition.com/concepts/data-governance/recall"]
 
 [[concepts]]
 id = "true-negative-rate"
@@ -808,6 +881,10 @@ context = "llm-evaluation"
 definition = "The true negative rate, TNR, is the share of human FAIL rows that the judge fails."
 section = "tpr-and-tnr"
 example = "tpr-tnr"
+wikidata = "Q3494375"
+
+[concepts.relations]
+contrasts-with = ["agreement"]
 
 [[concepts]]
 id = "crossover-point"
@@ -841,6 +918,9 @@ context = "llm-evaluation"
 definition = "The transfer assumption is that the judge's miss rate on human passes, and its pass-through rate on human fails, are the same on sablefile's replies as on the HelpSteer2 rows."
 section = "transfer-assumption"
 
+[concepts.relations]
+prerequisite-of = ["corrected-pass-rate"]
+
 [[concepts]]
 id = "pairwise-judge"
 term = "pairwise judge"
@@ -848,6 +928,9 @@ context = "llm-evaluation"
 definition = "A pairwise judge reads two replies and picks the better one, rather than passing or failing each."
 section = "pairwise-calibration"
 example = "pairwise-agreement"
+
+[concepts.relations]
+contrasts-with = ["pass-or-fail-rubric"]
 
 [[concepts]]
 id = "position"
@@ -873,6 +956,7 @@ term = "self-preference"
 context = "llm-evaluation"
 definition = "self-preference: whether the judge favours answers written by its own model."
 section = "when-the-judge-stops-being-reliable"
+agrees = [{ book = "business-intelligence-with-agents", definition = "Self-preference, a judge that \"scores its own outputs higher than others' while human annotators consider them of equal quality\" (Panickssery et al.), is a known bias" }]
 
 [concepts.relations]
 contrasts-with = ["length"]
@@ -902,6 +986,9 @@ definition = "An item flips when its five verdicts are not all the same."
 section = "variance-within-one-item"
 example = "flip-rate"
 
+[concepts.relations]
+measured-from = ["variance-set"]
+
 [[concepts]]
 id = "unpaired-comparison"
 term = "unpaired comparison"
@@ -915,6 +1002,9 @@ definition = "No difference detected is a finding about a set at its size."
 section = "paired-comparisons"
 example = "paired-prompt-b"
 
+[concepts.relations]
+computed-from = ["interval"]
+
 [[concepts]]
 id = "k5"
 term = "k5"
@@ -923,12 +1013,19 @@ definition = "The variant k5 retrieves five sections instead of three."
 section = "held-out-once"
 example = "held-out-variants"
 
+[concepts.relations]
+contrasts-with = ["baseline"]
+
 [[concepts]]
 id = "bonferroni-correction"
 term = "Bonferroni correction"
 definition = "the Bonferroni correction, which shares the error budget between the comparisons."
 formula = "1 minus 0.05 divided by m"
 section = "many-comparisons"
+wikidata = "Q385989"
+
+[concepts.relations]
+same-as = ["https://rollingedition.com/concepts/search-and-recommendation/bonferroni-correction"]
 
 [[concepts]]
 id = "citation-accuracy"
@@ -939,6 +1036,7 @@ section = "grounded-answers"
 
 [concepts.relations]
 contrasts-with = ["faithfulness"]
+close-to = ["https://rollingedition.com/concepts/search-and-recommendation/attribution"]
 
 [[concepts]]
 id = "faithfulness"
@@ -949,6 +1047,7 @@ section = "grounded-answers"
 
 [concepts.relations]
 contrasts-with = ["version-correctness"]
+same-as = ["https://rollingedition.com/concepts/search-and-recommendation/faithfulness"]
 
 [[concepts]]
 id = "version-correctness"
@@ -974,6 +1073,9 @@ context = "retrieval-augmented-generation"
 definition = "An answer is grounded when a reader who follows its citations finds the claim where the citation says it is, in the version they asked about."
 section = "what-grounded-means"
 
+[concepts.relations]
+close-to = ["https://rollingedition.com/concepts/search-and-recommendation/grounding"]
+
 [[concepts]]
 id = "citation"
 term = "citation"
@@ -981,6 +1083,9 @@ context = "retrieval-augmented-generation"
 definition = "A citation is a claim about the docs: this section, in this version, supports the sentence it is attached to."
 section = "citation-accuracy"
 example = "citation-accuracy-counts"
+
+[concepts.relations]
+close-to = ["https://rollingedition.com/concepts/search-and-recommendation/citation"]
 
 [[concepts]]
 id = "citation-rate"
@@ -1001,6 +1106,9 @@ definition = "The item rate counts an answered item once if at least one of its 
 section = "citation-accuracy"
 example = "citation-accuracy-counts"
 
+[concepts.relations]
+computed-from = ["llm-evaluation/supported"]
+
 [[concepts]]
 id = "judged-correct-rate"
 term = "judged-correct rate"
@@ -1008,6 +1116,9 @@ context = "llm-evaluation"
 definition = "The judged-correct rate is the count for version-dependent items alone, so a version miss shows on its own line, and a team can see whether a change to retrieval moved it."
 section = "version-correctness"
 example = "version-correct-answers"
+
+[concepts.relations]
+computed-from = ["version-dependent-item"]
 
 [[concepts]]
 id = "outcome"
@@ -1032,6 +1143,9 @@ term = "retrieval-path count"
 context = "retrieval-augmented-generation"
 definition = "The retrieval-path count asks one question of each item: is a supporting section of the asked version in the top k?"
 section = "retrieval-quality"
+
+[concepts.relations]
+measured-from = ["llm-evaluation/supporting-sections"]
 
 [[concepts]]
 id = "false-refusal-rate"
@@ -1063,6 +1177,9 @@ definition = "A guard reads the best-matching section's score and declines when 
 section = "a-guard"
 example = "tune-guard-dev"
 
+[concepts.relations]
+computed-from = ["bm25"]
+
 [[concepts]]
 id = "xstest"
 term = "XSTest"
@@ -1078,6 +1195,9 @@ definition = "A gate is a rule that stops a change from merging."
 section = "a-gate-that-respects-the-interval"
 example = "gate-real-drop"
 
+[concepts.relations]
+same-as = ["https://rollingedition.com/concepts/data-governance/gate"]
+
 [[concepts]]
 id = "upper-bound"
 term = "upper bound"
@@ -1086,6 +1206,9 @@ definition = "The upper bound is the least negative reading the data still allow
 section = "a-gate-that-respects-the-interval"
 example = "gate-real-drop"
 
+[concepts.relations]
+part-of = ["artificial-intelligence/interval"]
+
 [[concepts]]
 id = "naive-gate"
 term = "naive gate"
@@ -1093,12 +1216,18 @@ context = "llm-evaluation"
 definition = "A naive gate would fail whenever the point estimate of the difference is below minus the threshold"
 section = "a-gate-that-respects-the-interval"
 
+[concepts.relations]
+contrasts-with = ["gate"]
+
 [[concepts]]
 id = "weak-pass"
 term = "weak pass"
 context = "llm-evaluation"
 definition = "A pass with a wide interval is a weak pass"
 section = "a-gate-that-respects-the-interval"
+
+[concepts.relations]
+measured-from = ["artificial-intelligence/interval"]
 
 [[concepts]]
 id = "flip-rate"
@@ -1122,3 +1251,9 @@ id = "example-environment"
 term = "example environment"
 definition = "the book keeps one example environment: one set of files that every chapter's examples import, pinned to the same versions, so the replay model, the checks and the gate are the same code in every chapter."
 section = "running-it-as-a-framework-task"
+
+[concepts.relations]
+contrasts-with = ["evaluation-frameworks/task"]
+
+[retired]
+"llm-evaluation/over-declining" = "llm-evaluation/false-refusal"
