@@ -70,7 +70,7 @@ The longest band passed {{out:length-and-verdicts:30 words or more}}.
 
 The comparison the book reports is the longest band minus the shortest. Its order is fixed by length, so it is set before anyone reads the rates. The highest-rate band minus the lowest-rate band would be chosen after the rates are seen, and it could never fall below zero. The gap is {{out:verdict-limits:length gap, longest band minus shortest band}}.
 
-The method is {{out:verdict-limits:length gap method}}. The two bands hold different items, so each is resampled on its own, and the bands' counts are the ones in their rates above. The band counts are small, so the interval is wide. The interval includes zero, so the result is no difference detected between the longest and the shortest band.
+The method is {{out:verdict-limits:length gap method}}. The two bands hold different items, so each is resampled on its own, and the bands' counts are the ones in their rates above. The band counts are small, so the interval is wide. The interval includes zero, so the result is [no difference detected](#paired-comparisons) between the longest and the shortest band.
 
 No difference detected does not mean that length is harmless. It says that bands of this size cannot separate a gap from zero. They cannot pick out a few points of bias, because one reply moves a band's rate by several points. The bootstrap over items that [intervals and sample size](intervals-and-sample-size#bootstrap-over-items) describes is the same resampling. The two bands here are resampled on their own, an interval for two separate groups, which that chapter does not build.
 

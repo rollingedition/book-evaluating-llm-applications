@@ -12,7 +12,7 @@ This chapter builds the set the book uses and checks it with code. It then reads
 
 ## What a test set is for {#what-a-test-set-is-for}
 
-A test set is a fixed set of questions, paired with the answers you would accept, that stands in for the questions users will ask. Its job is to be asked the same questions each time something changes, so that a difference in score comes from the change and not from the questions. It does that job only while it stays fixed. This set was written from the docs rather than sampled from users, so it stands in for them and does not reproduce them.
+A [test set](#the-twenty-items) is a fixed set of questions, paired with the answers you would accept, that stands in for the questions users will ask. Its job is to be asked the same questions each time something changes, so that a difference in score comes from the change and not from the questions. It does that job only while it stays fixed. This set was written from the docs rather than sampled from users, so it stands in for them and does not reproduce them.
 
 Each row is an **item**: one test question with the fields a scorer needs. The item is the unit of every count in this book, so a pass rate is always a share of items, and its denominator says which ones. Each item has a **reference answer**, which the scorer compares a reply with, and **supporting sections**, the parts of the docs that a correct answer rests on. The reference answers are written labels. The book's own drafting agents wrote them from the docs, a second pass checked them against the docs, and a script checks the file's shape and section IDs. They are not human labels, and the book does not call them that.
 
@@ -58,7 +58,7 @@ The set holds {{out:check-item-schema:items}} items, and the rules find {{out:ch
 
 ## Kinds and coverage {#kinds-and-coverage}
 
-Each kind tests something the assistant must do. An answerable item has docs that answer it fully, so the assistant must answer and agree with the reference, and its citations are checked on their own. A refusal there is a false refusal. An unanswerable item has docs that do not say, so the right reply is the decline phrase, exactly. Any other reply is a false answer, and these items are what stop an assistant that always answers from scoring well. [The chapter on declining](declining-when-the-docs-dont-say) covers the phrase. A version-dependent item names the version it asks about, and its reply must match that version's reference. An ambiguous item admits two readings, and the reference holds one answer per reading. A reply must answer each reading the docs support, and a partial answer fails.
+Each kind tests something the assistant must do. An [answerable item](#the-twenty-items) has docs that answer it fully, so the assistant must answer and agree with the reference, and its citations are checked on their own. A refusal there is a [false refusal](#declines-in-code). An [unanswerable item](#the-twenty-items) has docs that do not say, so the right reply is the decline phrase, exactly. Any other reply is a false answer, and these items are what stop an assistant that always answers from scoring well. [The chapter on declining](declining-when-the-docs-dont-say) covers the phrase. A version-dependent item names the version it asks about, and its reply must match that version's reference. An ambiguous item admits two readings, and the reference holds one answer per reading. A reply must answer each reading the docs support, and a partial answer fails.
 
 The kinds table below prints the set by kind and by split.
 
@@ -92,7 +92,7 @@ One item carries two behaviours, so the six counts add up to one more than the i
 
 ### Planted items and their traps {#planted-items}
 
-A planted item is written to break an assistant in one named way. Each carries a reason from a fixed list of five:
+A [planted item](#the-twenty-items) is written to break an assistant in one named way. Each carries a reason from a fixed list of five:
 
 - `false-premise`: the question asks about a flag or key that the asked version does not have. The right reply is the decline phrase, so planted false premises are always unanswerable.
 - `near-miss-term`: a term one version renamed, or a term the docs use for another concept.
@@ -114,7 +114,7 @@ The second trap is a reference that is true for two versions, so a reply that de
 
 ## Dev and held-out {#dev-and-held-out}
 
-The set is split in two, because a score tuned on the questions it is measured with does not show progress. Dev may be tuned on, and held-out is used once, to report a result. The split is stratified, so that each kind appears in both parts in about the same proportion. Without that, one part could hold most of the unanswerable items, and the two scores would then measure different sets. The set holds {{out:check-item-schema:split dev}} dev items and {{out:check-item-schema:split held-out}} held-out items, and each row's `split` field records which part it belongs to. The twenty items that [chapter 1](measure-before-you-change) measures are dev items, so its rates are dev rates.
+The set is split in two, because a score tuned on the questions it is measured with does not show progress. [Dev](#read-the-outputs) may be tuned on, and held-out is used once, to report a result. The split is stratified, so that each kind appears in both parts in about the same proportion. Without that, one part could hold most of the unanswerable items, and the two scores would then measure different sets. The set holds {{out:check-item-schema:split dev}} dev items and {{out:check-item-schema:split held-out}} held-out items, and each row's `split` field records which part it belongs to. The twenty items that [chapter 1](measure-before-you-change) measures are dev items, so its rates are dev rates.
 
 Only dev may be tuned on. Prompt wording, the number of sections retrieved, the version filter and the wording of the judge's rubric may all be chosen from dev results. Once a setting is chosen, it is frozen before held-out runs. Held-out runs once for each variant, in the chapter that compares the variants, and its numbers are the ones a chapter quotes. A recording's manifest says whether anything in it was tuned on held-out, and that answer must be no.
 
@@ -150,11 +150,11 @@ The cap also touches the right replies: {{out:score-gsm8k:no final answer line a
 
 The book uses GSM8K to check the harness, not to rank the assistant.
 
-**Working rule:** Count the replies with no final line before you quote a score, and compare two configurations only with a paired comparison that clears its interval.
+**Working rule:** Count the replies with no final line before you quote a score, and compare two configurations only with a [paired comparison](#paired-comparisons) that clears its interval.
 
 ### TruthfulQA {#truthfulqa}
 
-TruthfulQA asks questions on which people often answer falsely, such as a common myth. Its paper describes 817 questions in 38 categories ([Lin and colleagues, 2022](https://arxiv.org/abs/2109.07958)). The book uses its multiple-choice version, MC1: exactly one option is correct, and the model answers with a letter. The [dataset card](https://huggingface.co/datasets/truthfulqa/truthful_qa) has one split, named validation, and gives the licence as Apache-2.0.
+TruthfulQA asks questions on which people often answer falsely, such as a common myth. Its paper describes 817 questions in 38 categories ([Lin and colleagues, 2022](https://arxiv.org/abs/2109.07958)). The book uses TruthfulQA's multiple-choice version, MC1: exactly one option is correct, and the model answers with a letter. The [dataset card](https://huggingface.co/datasets/truthfulqa/truthful_qa) has one split, named validation, and gives the licence as Apache-2.0.
 
 [Example: score-truthfulqa](../examples/score-truthfulqa.py)
 

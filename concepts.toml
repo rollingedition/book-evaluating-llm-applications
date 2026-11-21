@@ -1,0 +1,1124 @@
+# The terms this book defines, each quoted from the sentence that defines it (writing standards W-77 to W-80).
+
+context = "artificial-intelligence"
+
+[[contexts]]
+id = "evaluation-frameworks"
+broader = "llm-evaluation"
+label = "Evaluation frameworks"
+
+[[concepts]]
+id = "test-set"
+term = "test set"
+context = "llm-evaluation"
+definition = "A test set is a list of questions, each with the answer it should get."
+section = "the-twenty-items"
+example = "twenty-questions"
+
+[[concepts]]
+id = "answerable-item"
+term = "answerable item"
+context = "llm-evaluation"
+definition = "Answerable items have their answer on the page."
+section = "the-twenty-items"
+example = "twenty-questions"
+
+[[concepts]]
+id = "unanswerable-item"
+term = "unanswerable item"
+context = "llm-evaluation"
+definition = "Unanswerable items ask about something the docs don't cover, and the right reply is the decline."
+section = "the-twenty-items"
+example = "twenty-questions"
+
+[concepts.relations]
+contrasts-with = ["answerable-item"]
+
+[[concepts]]
+id = "version-dependent-item"
+term = "version-dependent item"
+context = "llm-evaluation"
+definition = "Version-dependent items have an answer that changes from one version to the next"
+section = "the-twenty-items"
+example = "twenty-questions"
+
+[[concepts]]
+id = "twin"
+term = "twin"
+context = "llm-evaluation"
+definition = "a twin: the same question asked about another version"
+section = "the-twenty-items"
+example = "twenty-questions"
+
+[[concepts]]
+id = "ambiguous-item"
+term = "ambiguous item"
+context = "llm-evaluation"
+definition = "Ambiguous items could mean two things, and their reference answer covers both readings."
+section = "the-twenty-items"
+example = "twenty-questions"
+
+[[concepts]]
+id = "planted-item"
+term = "planted item"
+context = "llm-evaluation"
+definition = "A planted item was written to catch one particular mistake"
+section = "the-twenty-items"
+example = "twenty-questions"
+
+[[concepts]]
+id = "bm25"
+term = "BM25"
+context = "retrieval-augmented-generation"
+definition = "The index is built with BM25, which scores each section by the words it shares with the question."
+section = "retrieve-then-answer"
+example = "retrieve-top-sections"
+applies_to = ["bm25s"]
+
+[concepts.relations]
+implemented-by = [{ to = "bm25s", versions = ">=0.3" }]
+
+[[concepts]]
+id = "recording"
+term = "recording"
+context = "llm-evaluation"
+definition = "The recording is a folder of replies, one per item."
+section = "replay-the-answers"
+example = "replay-one-answer"
+
+[[concepts]]
+id = "citation-form"
+term = "citation form"
+context = "retrieval-augmented-generation"
+definition = "the citation form, a section ID in square brackets"
+section = "citations-in-code"
+example = "check-citations"
+
+[[concepts]]
+id = "unknown-section"
+term = "unknown-section"
+context = "llm-evaluation"
+definition = "The check calls a citation to any section that was not in the prompt `unknown-section`, whichever way it went wrong."
+section = "citations-in-code"
+example = "check-citations"
+
+[concepts.relations]
+part-of = ["format-check"]
+
+[[concepts]]
+id = "decline-phrase"
+term = "decline phrase"
+aliases = ["decline sentence"]
+context = "llm-evaluation"
+definition = "When the docs don't answer a question, the assistant must reply with the decline phrase, \"The docs don't say.\", and nothing else."
+section = "declines-in-code"
+example = "check-declines"
+
+[[concepts]]
+id = "false-refusal"
+term = "false refusal"
+context = "llm-evaluation"
+definition = "A false refusal is an answerable item declined"
+section = "declines-in-code"
+example = "check-declines"
+
+[concepts.relations]
+contrasts-with = ["false-answer"]
+
+[[concepts]]
+id = "false-answer"
+term = "false answer"
+context = "llm-evaluation"
+definition = "a false answer is an unanswerable item answered."
+section = "declines-in-code"
+example = "check-declines"
+
+[[concepts]]
+id = "judge"
+term = "judge"
+context = "llm-evaluation"
+definition = "a judge: a model that reads the question, a written reference answer and the assistant's reply, and returns PASS or FAIL"
+section = "one-judge"
+example = "judge-one-answer"
+
+[[concepts]]
+id = "pass-rate"
+term = "pass rate"
+context = "llm-evaluation"
+definition = "A pass rate is a count divided by a denominator"
+formula = "pass rate = passed items / items"
+section = "a-pass-rate-and-its-interval"
+example = "pass-rate-interval"
+
+[[concepts]]
+id = "interval"
+term = "interval"
+aliases = ["95% interval"]
+definition = "An interval answers a different question from the pass rate: how far would the rate move if the set had been another twenty items drawn the same way?"
+section = "a-pass-rate-and-its-interval"
+example = "pass-rate-interval"
+
+[concepts.relations]
+computed-from = ["pass-rate"]
+
+[[concepts]]
+id = "percentile-bootstrap"
+term = "percentile bootstrap"
+definition = "The percentile bootstrap is the simplest interval built on resampling, the middle 95% of the resampled rates."
+section = "a-pass-rate-and-its-interval"
+example = "pass-rate-interval"
+
+[concepts.relations]
+broader = ["interval"]
+
+[[concepts]]
+id = "paired-comparison"
+term = "paired comparison"
+definition = "A paired comparison subtracts, for each item, the verdict of the baseline from the verdict of prompt B, and averages the differences over the set."
+section = "paired-comparisons"
+example = "paired-prompt-b"
+
+[concepts.relations]
+contrasts-with = ["unpaired-comparison"]
+
+[[concepts]]
+id = "dev"
+term = "dev"
+aliases = ["dev items"]
+context = "llm-evaluation"
+definition = "dev items, the split of the test set this book works with while it develops its measures"
+section = "read-the-outputs"
+
+[concepts.relations]
+part-of = ["test-set"]
+
+[[concepts]]
+id = "baseline"
+term = "baseline"
+context = "llm-evaluation"
+definition = "The baseline is the setup chapter 1 measured."
+section = "what-the-replies-look-like"
+example = "read-replies-dev"
+
+[[concepts]]
+id = "unfiltered-variant"
+term = "unfiltered variant"
+context = "llm-evaluation"
+definition = "The unfiltered variant drops the baseline's version filter."
+section = "what-the-replies-look-like"
+example = "read-replies-dev"
+
+[[concepts]]
+id = "second-model-variant"
+term = "second-model variant"
+aliases = ["second model"]
+context = "llm-evaluation"
+definition = "The second-model variant keeps the baseline's prompt and hands the answer to a smaller model, Qwen3 with 0.6 billion parameters in an 8-bit build."
+section = "what-the-replies-look-like"
+example = "read-replies-dev"
+
+[[concepts]]
+id = "reference-answer"
+term = "reference answer"
+context = "llm-evaluation"
+definition = "the reference answer, which is the author's statement of what a right reply says"
+section = "what-the-replies-look-like"
+example = "read-replies-dev"
+
+[concepts.relations]
+part-of = ["item"]
+
+[[concepts]]
+id = "near-miss-term"
+term = "near-miss term"
+aliases = ["near-miss-term"]
+context = "llm-evaluation"
+definition = "a planted near-miss term, a name close to one the docs use, which catches a careless reply"
+section = "what-the-replies-look-like"
+example = "read-replies-dev"
+
+[[concepts]]
+id = "failure-mode"
+term = "failure mode"
+aliases = ["mode"]
+context = "llm-evaluation"
+definition = "Each reply got one mode, its main defect"
+section = "coding-the-failures"
+example = "tally-failure-modes"
+
+[concepts.relations]
+part-of = ["check-candidate"]
+
+[[concepts]]
+id = "ok"
+term = "ok"
+context = "llm-evaluation"
+definition = "a reply with no defect got `ok`."
+section = "coding-the-failures"
+example = "tally-failure-modes"
+
+[[concepts]]
+id = "over-declining"
+term = "over-declining"
+context = "llm-evaluation"
+definition = "An over-declining reply declines an item the docs answer."
+section = "over-declining"
+
+[concepts.relations]
+broader = ["failure-mode"]
+
+[[concepts]]
+id = "wrong-version-answer"
+term = "wrong-version answer"
+context = "llm-evaluation"
+definition = "A wrong-version answer gives another version's behaviour for the version the question asks about"
+section = "wrong-version-answers"
+
+[concepts.relations]
+broader = ["failure-mode"]
+
+[[concepts]]
+id = "missed-refusal"
+term = "missed refusal"
+context = "llm-evaluation"
+definition = "A missed refusal answers an unanswerable item with content the docs don't hold."
+section = "missed-refusals"
+
+[concepts.relations]
+broader = ["failure-mode"]
+
+[[concepts]]
+id = "check-candidate"
+term = "check candidate"
+context = "llm-evaluation"
+definition = "a candidate has four parts: the mode, the input the check reads, the claim it tests, and what it can't see."
+section = "from-a-failure-to-a-check"
+
+[[concepts]]
+id = "item"
+term = "item"
+context = "llm-evaluation"
+definition = "an item: one test question with the fields a scorer needs."
+section = "what-a-test-set-is-for"
+
+[concepts.relations]
+part-of = ["test-set"]
+
+[[concepts]]
+id = "supporting-sections"
+term = "supporting sections"
+context = "llm-evaluation"
+definition = "supporting sections, the parts of the docs that a correct answer rests on."
+section = "what-a-test-set-is-for"
+
+[concepts.relations]
+part-of = ["item"]
+
+[[concepts]]
+id = "kind"
+term = "kind"
+context = "llm-evaluation"
+definition = "Each item also has a kind, which says what a correct reply looks like."
+section = "what-a-test-set-is-for"
+
+[concepts.relations]
+part-of = ["item"]
+
+[[concepts]]
+id = "extra-forbid"
+term = "extra=\"forbid\""
+definition = "The loader sets `extra=\"forbid\"`, so an unknown field is an error and not a field that is quietly ignored."
+section = "the-item-schema"
+applies_to = ["pydantic"]
+
+[concepts.relations]
+implemented-by = [{ to = "pydantic", versions = ">=2" }]
+
+[[concepts]]
+id = "coverage"
+term = "coverage"
+context = "llm-evaluation"
+definition = "Coverage asks which parts of the tool the set exercises."
+section = "kinds-and-coverage"
+example = "behaviour-coverage"
+
+[[concepts]]
+id = "false-premise"
+term = "false premise"
+aliases = ["false-premise"]
+context = "llm-evaluation"
+definition = "`false-premise`: the question asks about a flag or key that the asked version does not have."
+section = "planted-items"
+
+[[concepts]]
+id = "version-swap"
+term = "version swap"
+aliases = ["version-swap"]
+context = "llm-evaluation"
+definition = "`version-swap`: the question uses another version's wording, so an assistant that matches wording answers for that version."
+section = "planted-items"
+
+[[concepts]]
+id = "stale-answer"
+term = "stale answer"
+aliases = ["stale-answer"]
+context = "llm-evaluation"
+definition = "`stale-answer`: the answer sits under a section ID that a version filter removes, so a filter that is too strict misses it."
+section = "planted-items"
+
+[[concepts]]
+id = "ambiguous-target"
+term = "ambiguous target"
+aliases = ["ambiguous-target"]
+context = "llm-evaluation"
+definition = "`ambiguous-target`: a pronoun or a phrase such as \"the file\" has no clear referent without the sections."
+section = "planted-items"
+
+[[concepts]]
+id = "held-out"
+term = "held-out"
+aliases = ["held-out items"]
+context = "llm-evaluation"
+definition = "held-out is used once, to report a result."
+section = "dev-and-held-out"
+
+[concepts.relations]
+contrasts-with = ["dev"]
+part-of = ["test-set"]
+
+[[concepts]]
+id = "stratified-split"
+term = "stratified"
+definition = "The split is stratified, so that each kind appears in both parts in about the same proportion."
+section = "dev-and-held-out"
+
+[[concepts]]
+id = "public-benchmark"
+term = "public benchmark"
+context = "llm-evaluation"
+definition = "A public benchmark is a set of questions and answers someone else published."
+section = "public-benchmarks"
+
+[[concepts]]
+id = "gsm8k"
+term = "GSM8K"
+context = "llm-evaluation"
+definition = "GSM8K is grade-school math word problems, each with a worked solution that ends in one number."
+section = "gsm8k"
+example = "score-gsm8k"
+
+[concepts.relations]
+broader = ["public-benchmark"]
+
+[[concepts]]
+id = "truthfulqa"
+term = "TruthfulQA"
+context = "llm-evaluation"
+definition = "TruthfulQA asks questions on which people often answer falsely, such as a common myth."
+section = "truthfulqa"
+example = "score-truthfulqa"
+
+[concepts.relations]
+broader = ["public-benchmark"]
+
+[[concepts]]
+id = "mc1"
+term = "MC1"
+context = "llm-evaluation"
+definition = "The book uses TruthfulQA's multiple-choice version, MC1: exactly one option is correct, and the model answers with a letter."
+section = "truthfulqa"
+example = "score-truthfulqa"
+
+[concepts.relations]
+part-of = ["truthfulqa"]
+
+[[concepts]]
+id = "chance-share"
+term = "chance share"
+context = "llm-evaluation"
+definition = "The chance share averages one over each item's option count."
+section = "truthfulqa"
+example = "score-truthfulqa"
+
+[[concepts]]
+id = "contamination"
+term = "contamination"
+context = "llm-evaluation"
+definition = "Contamination is when a benchmark's items or answers appear in training data, so a score can reflect memory rather than ability."
+section = "contamination"
+
+[[concepts]]
+id = "code-check"
+term = "code check"
+context = "llm-evaluation"
+definition = "A code check reads two things: the reply's text, and the item's own data, which holds its reference answer and the list of sections that support it."
+section = "what-a-code-check-can-see"
+
+[concepts.relations]
+contrasts-with = ["judge"]
+
+[[concepts]]
+id = "format-check"
+term = "format check"
+context = "llm-evaluation"
+definition = "The format check asks whether a reply has the shape the prompt asks for, before anyone reads what it says."
+section = "format-checks"
+example = "format-problems-baseline"
+
+[[concepts]]
+id = "empty"
+term = "empty"
+context = "llm-evaluation"
+definition = "`empty` is a reply with no text."
+section = "format-checks"
+example = "format-problems-variants"
+
+[concepts.relations]
+part-of = ["format-check"]
+
+[[concepts]]
+id = "declined-with-text"
+term = "declined-with-text"
+context = "llm-evaluation"
+definition = "`declined-with-text` is a reply that contains the decline sentence along with other text."
+section = "format-checks"
+example = "format-problems-variants"
+
+[concepts.relations]
+part-of = ["format-check"]
+
+[[concepts]]
+id = "no-citation"
+term = "no-citation"
+context = "llm-evaluation"
+definition = "`no-citation` is an answer that cites nothing."
+section = "format-checks"
+example = "format-problems-variants"
+
+[concepts.relations]
+part-of = ["format-check"]
+
+[[concepts]]
+id = "answered-declined-expected"
+term = "answered-declined-expected"
+context = "llm-evaluation"
+definition = "`answered-declined-expected` is an answer to an item that has to be declined."
+section = "format-checks"
+example = "format-problems-variants"
+
+[concepts.relations]
+part-of = ["format-check"]
+
+[[concepts]]
+id = "citation-first"
+term = "citation-first"
+context = "llm-evaluation"
+definition = "`citation-first`, for a reply whose first line opens with a citation"
+section = "format-checks"
+example = "format-problems-variants"
+
+[[concepts]]
+id = "stray-line"
+term = "stray-line"
+context = "llm-evaluation"
+definition = "`stray-line`, for a line that ends no sentence once its citations are taken out."
+section = "format-checks"
+example = "format-problems-variants"
+
+[[concepts]]
+id = "supported"
+term = "supported"
+context = "llm-evaluation"
+definition = "`supported` means the ID is on the item's list for the asked version."
+section = "citation-checks"
+example = "check-citation-support"
+
+[concepts.relations]
+measured-from = ["supporting-sections"]
+
+[[concepts]]
+id = "unlisted"
+term = "unlisted"
+context = "llm-evaluation"
+definition = "`unlisted` means a section of the asked version that the item doesn't list."
+section = "citation-checks"
+example = "check-citation-support"
+
+[[concepts]]
+id = "wrong-version-citation"
+term = "wrong-version citation"
+aliases = ["wrong-version"]
+context = "llm-evaluation"
+definition = "`wrong-version` means a section that exists in another version only."
+section = "citation-checks"
+example = "check-citation-support"
+
+[concepts.relations]
+contrasts-with = ["wrong-version-answer"]
+
+[[concepts]]
+id = "missing"
+term = "missing"
+context = "llm-evaluation"
+definition = "`missing` means no version has a section with the cited ID."
+section = "citation-checks"
+example = "check-citation-support"
+
+[[concepts]]
+id = "exact-match"
+term = "exact match"
+definition = "An exact match asks whether two strings are equal, and it suits any text that is fixed."
+section = "exact-and-fuzzy"
+
+[concepts.relations]
+contrasts-with = ["fuzzy-match"]
+
+[[concepts]]
+id = "fuzzy-match"
+term = "fuzzy match"
+definition = "A fuzzy match scores how alike two strings are."
+section = "exact-and-fuzzy"
+example = "fuzzy-match"
+
+[[concepts]]
+id = "ratio"
+term = "ratio()"
+definition = "`ratio()`, which the documentation defines as twice the number of matching elements divided by the total number of elements in both sequences."
+section = "exact-and-fuzzy"
+example = "fuzzy-match"
+
+[[concepts]]
+id = "autojunk"
+term = "autojunk"
+definition = "For sequences of 200 items or more, the documentation treats an item as junk when its repeats make up more than one per cent of the sequence, unless `autojunk` is turned off."
+section = "exact-and-fuzzy"
+example = "fuzzy-match"
+
+[[concepts]]
+id = "bleu"
+term = "BLEU"
+definition = "Papineni and colleagues proposed BLEU in 2002 as a quick and inexpensive way to score machine translation."
+section = "where-bleu-rouge-mislead"
+example = "overlap-misleads"
+
+[[concepts]]
+id = "rouge-n"
+term = "ROUGE-N"
+definition = "Lin defined ROUGE-N as an n-gram recall: the share of the reference's word runs that the candidate covers"
+section = "where-bleu-rouge-mislead"
+
+[[concepts]]
+id = "rouge-1-f1"
+term = "ROUGE-1 F1"
+definition = "ROUGE-1 F1 counts single words."
+section = "where-bleu-rouge-mislead"
+example = "overlap-misleads"
+
+[concepts.relations]
+contrasts-with = ["rouge-n"]
+computed-from = ["f1"]
+
+[[concepts]]
+id = "f1"
+term = "F1"
+definition = "F1, which combines recall with precision"
+section = "where-bleu-rouge-mislead"
+example = "overlap-misleads"
+
+[[concepts]]
+id = "rubric"
+term = "rubric"
+context = "llm-evaluation"
+definition = "A judge works from its instructions, and the instructions are the rubric."
+section = "a-judge-with-a-rubric"
+
+[[concepts]]
+id = "system-text"
+term = "system text"
+context = "llm-evaluation"
+definition = "The system text states the task, the rules and the form the reply must take."
+section = "a-judge-with-a-rubric"
+
+[concepts.relations]
+part-of = ["rubric"]
+
+[[concepts]]
+id = "template"
+term = "template"
+context = "llm-evaluation"
+definition = "The template wraps the request, the reference and the reply in markers, so the judge can tell them apart."
+section = "a-judge-with-a-rubric"
+
+[concepts.relations]
+part-of = ["rubric"]
+
+[[concepts]]
+id = "answer-judge"
+term = "answer judge"
+context = "llm-evaluation"
+definition = "The answer judge checks a reply about sablefile against the written reference answer for its question."
+section = "what-a-judge-is-asked"
+
+[[concepts]]
+id = "calibration-rubric"
+term = "calibration rubric"
+aliases = ["rubric A"]
+context = "llm-evaluation"
+definition = "The calibration rubric checks correctness with no reference, on rows from HelpSteer2"
+section = "what-a-judge-is-asked"
+example = "rubric-text"
+
+[concepts.relations]
+broader = ["rubric"]
+
+[[concepts]]
+id = "rubric-b"
+term = "rubric B"
+context = "llm-evaluation"
+definition = "Rubric B is a second wording of the calibration task."
+section = "what-a-judge-is-asked"
+example = "rubric-text"
+
+[concepts.relations]
+broader = ["rubric"]
+
+[[concepts]]
+id = "reference-guided-judge"
+term = "reference-guided judge"
+context = "llm-evaluation"
+definition = "A reference-guided judge is given a written answer for the question, and it checks the reply against that answer."
+section = "reference-guided"
+
+[concepts.relations]
+contrasts-with = ["reference-free-judge"]
+
+[[concepts]]
+id = "reference-free-judge"
+term = "reference-free judge"
+context = "llm-evaluation"
+definition = "A reference-free judge is given only the request and the reply, and it decides from what it knows whether the reply is right."
+section = "reference-guided"
+
+[[concepts]]
+id = "pass-or-fail-rubric"
+term = "pass or fail rubric"
+context = "llm-evaluation"
+definition = "A pass or fail rubric gives the judge two answers."
+section = "pass-fail-or-scale"
+
+[concepts.relations]
+broader = ["rubric"]
+
+[[concepts]]
+id = "scale"
+term = "scale"
+context = "llm-evaluation"
+definition = "A scale gives the judge several answers."
+section = "pass-fail-or-scale"
+
+[concepts.relations]
+contrasts-with = ["pass-or-fail-rubric"]
+
+[[concepts]]
+id = "pairwise-judgment"
+term = "pairwise judgment"
+context = "llm-evaluation"
+definition = "A pairwise judgment shows the judge two replies to the same request and asks which is better."
+section = "one-answer-or-two"
+example = "pairwise-both-orders"
+
+[[concepts]]
+id = "consistent-pair"
+term = "consistent pair"
+context = "llm-evaluation"
+definition = "A pair is consistent when the same response wins in both orders."
+section = "one-answer-or-two"
+example = "pairwise-both-orders"
+
+[concepts.relations]
+contrasts-with = ["order-changed-pair"]
+
+[[concepts]]
+id = "order-changed-pair"
+term = "order-changed pair"
+aliases = ["order-changed"]
+context = "llm-evaluation"
+definition = "An order-changed pair is one where the verdict followed the position, so it says nothing about which reply is better."
+section = "one-answer-or-two"
+example = "pairwise-both-orders"
+
+[[concepts]]
+id = "unreadable-verdict"
+term = "unreadable verdict"
+context = "llm-evaluation"
+definition = "an unreadable verdict means the judge gave no judgment at all."
+section = "verdict-first"
+example = "parse-verdicts"
+
+[concepts.relations]
+contrasts-with = ["fail-verdict"]
+
+[[concepts]]
+id = "fail-verdict"
+term = "FAIL"
+context = "llm-evaluation"
+definition = "A FAIL means the judge judged the answer wrong"
+section = "verdict-first"
+example = "parse-verdicts"
+
+[[concepts]]
+id = "agreement"
+term = "agreement"
+context = "llm-evaluation"
+definition = "Agreement is the share of rows on which the judge and the human give the same verdict."
+section = "agreement-and-kappa"
+example = "calibration-agreement"
+
+[[concepts]]
+id = "kappa"
+term = "kappa"
+definition = "For two raters on pass or fail, kappa is the observed agreement minus the chance agreement, divided by one minus the chance agreement."
+section = "agreement-and-kappa"
+example = "calibration-agreement"
+
+[concepts.relations]
+computed-from = ["agreement"]
+
+[[concepts]]
+id = "paired-difference"
+term = "paired difference"
+definition = "The paired difference is rubric B's score minus rubric A's, averaged over the dev rows"
+section = "agreement-and-kappa"
+example = "rubric-b-agreement"
+
+[[concepts]]
+id = "true-positive-rate"
+term = "true positive rate"
+aliases = ["TPR"]
+context = "llm-evaluation"
+definition = "The true positive rate, TPR, is the share of human PASS rows that the judge passes."
+section = "tpr-and-tnr"
+example = "tpr-tnr"
+
+[[concepts]]
+id = "true-negative-rate"
+term = "true negative rate"
+aliases = ["TNR"]
+context = "llm-evaluation"
+definition = "The true negative rate, TNR, is the share of human FAIL rows that the judge fails."
+section = "tpr-and-tnr"
+example = "tpr-tnr"
+
+[[concepts]]
+id = "crossover-point"
+term = "crossover point"
+aliases = ["p*"]
+context = "llm-evaluation"
+definition = "The pass-rate correction in the next section leaves a rate unchanged at the crossover point, p* = (1 − TNR) / (2 − TPR − TNR)."
+formula = "p* = (1 − TNR) / (2 − TPR − TNR)"
+section = "tpr-and-tnr"
+
+[concepts.relations]
+computed-from = ["true-positive-rate", "true-negative-rate"]
+
+[[concepts]]
+id = "corrected-pass-rate"
+term = "corrected pass rate"
+aliases = ["corrected rate"]
+context = "llm-evaluation"
+definition = "The corrected rate estimates the share of sablefile's replies that a person would pass, under the book's correctness cut."
+formula = "(observed + TNR - 1) / (TPR + TNR - 1)"
+section = "correcting-a-pass-rate"
+example = "corrected-pass-rate"
+
+[concepts.relations]
+computed-from = ["true-positive-rate", "true-negative-rate"]
+
+[[concepts]]
+id = "transfer-assumption"
+term = "transfer assumption"
+context = "llm-evaluation"
+definition = "The transfer assumption is that the judge's miss rate on human passes, and its pass-through rate on human fails, are the same on sablefile's replies as on the HelpSteer2 rows."
+section = "transfer-assumption"
+
+[[concepts]]
+id = "pairwise-judge"
+term = "pairwise judge"
+context = "llm-evaluation"
+definition = "A pairwise judge reads two replies and picks the better one, rather than passing or failing each."
+section = "pairwise-calibration"
+example = "pairwise-agreement"
+
+[[concepts]]
+id = "position"
+term = "position"
+context = "llm-evaluation"
+definition = "position: whether a pairwise verdict depends on which answer was shown first."
+section = "when-the-judge-stops-being-reliable"
+
+[[concepts]]
+id = "length"
+term = "length"
+aliases = ["verbosity bias"]
+context = "llm-evaluation"
+definition = "length: whether the pass rate rises with the length of the reply."
+section = "when-the-judge-stops-being-reliable"
+
+[concepts.relations]
+contrasts-with = ["position"]
+
+[[concepts]]
+id = "self-preference"
+term = "self-preference"
+context = "llm-evaluation"
+definition = "self-preference: whether the judge favours answers written by its own model."
+section = "when-the-judge-stops-being-reliable"
+
+[concepts.relations]
+contrasts-with = ["length"]
+
+[[concepts]]
+id = "unreadable-pair"
+term = "unreadable pair"
+context = "llm-evaluation"
+definition = "An unreadable pair has a missing verdict in either order."
+section = "position"
+example = "position-flips"
+
+[[concepts]]
+id = "variance-set"
+term = "variance set"
+context = "llm-evaluation"
+definition = "The variance set holds five samples of the assistant's reply to each dev item, drawn at temperature 0.7."
+section = "variance-within-one-item"
+example = "flip-rate"
+
+[[concepts]]
+id = "flip"
+term = "flip"
+aliases = ["flips", "flaky"]
+context = "llm-evaluation"
+definition = "An item flips when its five verdicts are not all the same."
+section = "variance-within-one-item"
+example = "flip-rate"
+
+[[concepts]]
+id = "unpaired-comparison"
+term = "unpaired comparison"
+definition = "An unpaired comparison takes two separate pass rates and sets them side by side."
+section = "paired-comparisons"
+
+[[concepts]]
+id = "no-difference-detected"
+term = "no difference detected"
+definition = "No difference detected is a finding about a set at its size."
+section = "paired-comparisons"
+example = "paired-prompt-b"
+
+[[concepts]]
+id = "k5"
+term = "k5"
+context = "llm-evaluation"
+definition = "The variant k5 retrieves five sections instead of three."
+section = "held-out-once"
+example = "held-out-variants"
+
+[[concepts]]
+id = "bonferroni-correction"
+term = "Bonferroni correction"
+definition = "the Bonferroni correction, which shares the error budget between the comparisons."
+formula = "1 minus 0.05 divided by m"
+section = "many-comparisons"
+
+[[concepts]]
+id = "citation-accuracy"
+term = "citation accuracy"
+context = "retrieval-augmented-generation"
+definition = "Citation accuracy asks whether each citation names a section the item lists as supporting."
+section = "grounded-answers"
+
+[concepts.relations]
+contrasts-with = ["faithfulness"]
+
+[[concepts]]
+id = "faithfulness"
+term = "faithfulness"
+context = "retrieval-augmented-generation"
+definition = "Faithfulness asks whether each claim is in the sections the assistant was shown."
+section = "grounded-answers"
+
+[concepts.relations]
+contrasts-with = ["version-correctness"]
+
+[[concepts]]
+id = "version-correctness"
+term = "version-correctness"
+context = "retrieval-augmented-generation"
+definition = "Version-correctness asks whether the answer fits the asked version."
+section = "grounded-answers"
+
+[[concepts]]
+id = "outcome-against-path"
+term = "outcome against path"
+context = "llm-evaluation"
+definition = "Outcome against path asks whether a pass came with its section in hand, and whether a fail had it."
+section = "grounded-answers"
+
+[concepts.relations]
+computed-from = ["outcome", "path"]
+
+[[concepts]]
+id = "grounded"
+term = "grounded"
+context = "retrieval-augmented-generation"
+definition = "An answer is grounded when a reader who follows its citations finds the claim where the citation says it is, in the version they asked about."
+section = "what-grounded-means"
+
+[[concepts]]
+id = "citation"
+term = "citation"
+context = "retrieval-augmented-generation"
+definition = "A citation is a claim about the docs: this section, in this version, supports the sentence it is attached to."
+section = "citation-accuracy"
+example = "citation-accuracy-counts"
+
+[[concepts]]
+id = "citation-rate"
+term = "citation rate"
+context = "retrieval-augmented-generation"
+definition = "The citation rate counts every citation in answered items that is supported."
+section = "citation-accuracy"
+example = "citation-accuracy-counts"
+
+[concepts.relations]
+contrasts-with = ["item-rate"]
+
+[[concepts]]
+id = "item-rate"
+term = "item rate"
+context = "retrieval-augmented-generation"
+definition = "The item rate counts an answered item once if at least one of its citations is supported, so one good citation carries the item."
+section = "citation-accuracy"
+example = "citation-accuracy-counts"
+
+[[concepts]]
+id = "judged-correct-rate"
+term = "judged-correct rate"
+context = "llm-evaluation"
+definition = "The judged-correct rate is the count for version-dependent items alone, so a version miss shows on its own line, and a team can see whether a change to retrieval moved it."
+section = "version-correctness"
+example = "version-correct-answers"
+
+[[concepts]]
+id = "outcome"
+term = "outcome"
+context = "llm-evaluation"
+definition = "Outcome is whether a reply passed."
+section = "outcome-and-path"
+
+[concepts.relations]
+contrasts-with = ["path"]
+
+[[concepts]]
+id = "path"
+term = "path"
+context = "llm-evaluation"
+definition = "Path is what the steps before the reply reached."
+section = "outcome-and-path"
+
+[[concepts]]
+id = "retrieval-path-count"
+term = "retrieval-path count"
+context = "retrieval-augmented-generation"
+definition = "The retrieval-path count asks one question of each item: is a supporting section of the asked version in the top k?"
+section = "retrieval-quality"
+
+[[concepts]]
+id = "false-refusal-rate"
+term = "false refusal rate"
+context = "llm-evaluation"
+definition = "The false refusal rate is the number of answerable items declined, over the number of answerable items."
+section = "two-errors"
+
+[concepts.relations]
+computed-from = ["false-refusal"]
+contrasts-with = ["false-answer-rate"]
+
+[[concepts]]
+id = "false-answer-rate"
+term = "false answer rate"
+context = "llm-evaluation"
+definition = "The false answer rate is the number of unanswerable items answered, over the number of unanswerable items."
+section = "two-errors"
+
+[concepts.relations]
+computed-from = ["false-answer"]
+
+[[concepts]]
+id = "guard"
+term = "guard"
+aliases = ["retrieval-score guard", "decline guard"]
+context = "retrieval-augmented-generation"
+definition = "A guard reads the best-matching section's score and declines when it falls below a threshold."
+section = "a-guard"
+example = "tune-guard-dev"
+
+[[concepts]]
+id = "xstest"
+term = "XSTest"
+context = "llm-evaluation"
+definition = "XSTest is a test suite of safe prompts that look unsafe."
+section = "outside-this-book"
+
+[[concepts]]
+id = "gate"
+term = "gate"
+context = "llm-evaluation"
+definition = "A gate is a rule that stops a change from merging."
+section = "a-gate-that-respects-the-interval"
+example = "gate-real-drop"
+
+[[concepts]]
+id = "upper-bound"
+term = "upper bound"
+context = "llm-evaluation"
+definition = "The upper bound is the least negative reading the data still allows"
+section = "a-gate-that-respects-the-interval"
+example = "gate-real-drop"
+
+[[concepts]]
+id = "naive-gate"
+term = "naive gate"
+context = "llm-evaluation"
+definition = "A naive gate would fail whenever the point estimate of the difference is below minus the threshold"
+section = "a-gate-that-respects-the-interval"
+
+[[concepts]]
+id = "weak-pass"
+term = "weak pass"
+context = "llm-evaluation"
+definition = "A pass with a wide interval is a weak pass"
+section = "a-gate-that-respects-the-interval"
+
+[[concepts]]
+id = "flip-rate"
+term = "flip rate"
+context = "llm-evaluation"
+definition = "the flip rate, the share of items that flip"
+section = "flaky-cases"
+
+[concepts.relations]
+computed-from = ["flip"]
+
+[[concepts]]
+id = "task"
+term = "task"
+context = "evaluation-frameworks"
+definition = "a task is the recipe for an evaluation, made minimally of a dataset, a solver and a scorer"
+section = "running-it-as-a-framework-task"
+
+[[concepts]]
+id = "example-environment"
+term = "example environment"
+definition = "the book keeps one example environment: one set of files that every chapter's examples import, pinned to the same versions, so the replay model, the checks and the gate are the same code in every chapter."
+section = "running-it-as-a-framework-task"
