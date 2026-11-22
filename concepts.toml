@@ -647,7 +647,7 @@ example = "fuzzy-match"
 [[concepts]]
 id = "bleu"
 term = "BLEU"
-definition = "Papineni and colleagues proposed BLEU in 2002 as a quick and inexpensive way to score machine translation, from modified n-gram precision and a brevity penalty."
+definition = "Papineni and colleagues proposed BLEU in 2002 as a quick and inexpensive way to score machine translation, from modified n-gram precision and a brevity penalty"
 section = "where-bleu-rouge-mislead"
 example = "overlap-misleads"
 wikidata = "Q3500773"
