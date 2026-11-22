@@ -1,0 +1,6 @@
+pairs: 3
+pairs where the wrong answer has the higher ROUGE-1 F1: 3 of 3
+smallest wrong-minus-right gap, ROUGE-1 F1: 0.509
+pairs where the wrong answer has the higher BLEU: 3 of 3
+smallest wrong-minus-right gap, BLEU: 0.484
+figure: figures/overlap-wrong-right.svg

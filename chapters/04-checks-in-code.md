@@ -110,6 +110,12 @@ Three questions about sablefile 2.0 show the problem most plainly. Each has a wr
 
 [Example: overlap-misleads](../examples/overlap-misleads.py)
 
+{{fig:overlap-wrong-right}} puts the three pairs side by side, under ROUGE-1 F1 on the left and BLEU on the right. In every row the wrong answer's circle sits to the right of the right answer's diamond, on both panels, and the example counts three of three pairs for each metric. The smallest lead is {{out:figure-overlap-wrong-right:smallest wrong-minus-right gap, ROUGE-1 F1}} under ROUGE-1 F1 and {{out:figure-overlap-wrong-right:smallest wrong-minus-right gap, BLEU}} under BLEU.
+
+![In every pair the wrong answer's score sits to the right of the right answer's, under both ROUGE-1 F1 and BLEU](../examples/figures/overlap-wrong-right.svg "Each pair's wrong and right answer, scored by ROUGE-1 F1 and by BLEU")
+
+[Example: figure-overlap-wrong-right](../examples/figure-overlap-wrong-right.py)
+
 The wrong answer outscores the right one on ROUGE-1 F1 in {{out:overlap-misleads:pairs where the wrong answer has the higher ROUGE-1 F1}} pairs. For pair one, the wrong answer scores {{out:overlap-misleads:pair 1, wrong answer, ROUGE-1 F1}}, and the right answer scores {{out:overlap-misleads:pair 1, right answer, ROUGE-1 F1}}.
 
 Read the BLEU lines with care. The formula the code writes out has no smoothing, so the score is zero whenever any of the four n-gram orders has no match at all. Each right answer shares single words with its reference but no two-word run, so its two-word precision is zero, and so is its BLEU. That is the formula's behaviour, and it says nothing about whether the answer is good.

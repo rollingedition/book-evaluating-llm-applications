@@ -18,6 +18,9 @@ say = "The code compares three pairs of sablefile answers, with an exact match a
 [examples.overlap-misleads]
 say = "The code scores three hand-written pairs of sablefile answers. For each answer it prints ROUGE-1 F1 and a BLEU-style score with no smoothing, from formulas written in the code. It also checks that the wrong answer scores higher on ROUGE-1 F1 in every pair. The check holds in {{out:overlap-misleads:pairs where the wrong answer has the higher ROUGE-1 F1}} pairs."
 
+[examples.figure-overlap-wrong-right]
+say = "The code scores the same three pairs under ROUGE-1 F1 and under BLEU, and draws each pair's wrong answer and right answer under both. It checks that the wrong answer scores higher in every pair under each metric. The check holds in {{out:figure-overlap-wrong-right:pairs where the wrong answer has the higher ROUGE-1 F1}} pairs under ROUGE-1 F1 and in {{out:figure-overlap-wrong-right:pairs where the wrong answer has the higher BLEU}} pairs under BLEU. The smallest gap is {{out:figure-overlap-wrong-right:smallest wrong-minus-right gap, ROUGE-1 F1}} under ROUGE-1 F1 and {{out:figure-overlap-wrong-right:smallest wrong-minus-right gap, BLEU}} under BLEU."
+
 [terms]
 "TREC" = "treck"
 "DL" = "D L"
