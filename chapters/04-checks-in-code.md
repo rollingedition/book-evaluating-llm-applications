@@ -12,7 +12,7 @@ A team that writes checks only for the marks it can see reports a clean run and 
 
 ## What a code check can see {#what-a-code-check-can-see}
 
-A code check reads two things: the reply's text, and the item's own data, which holds its reference answer and the list of sections that support it. It gives the same answer on every run, and it costs nothing to run again on a new batch of replies. Those are its strengths. Its limit is that it reads form and membership, never meaning. It can tell whether a reply has a citation, whether the cited ID was in the prompt, and whether the reply is exactly the decline sentence. It can't tell whether the cited section says what the answer says.
+A code check reads the reply's text and data the run already holds: the item's own data, which holds its reference answer and the list of sections that support it, the sections the prompt gave, and the docs' section IDs. It gives the same answer on every run, and it costs nothing to run again on a new batch of replies. Those are its strengths. Its limit is that it reads form and membership, never meaning. It can tell whether a reply has a citation, whether the cited ID was in the prompt, and whether the reply is exactly the decline sentence. It can't tell whether the cited section says what the answer says.
 
 Here is chapter 2's list of modes, each with what a code check can see of it.
 
@@ -26,7 +26,7 @@ Here is chapter 2's list of modes, each with what a code check can see of it.
 
 A program can also do a judge's work when the rule it applies can be written down. In the preprint [*Can Programs Replace LLM Judges?*](https://arxiv.org/abs/2611.24849) (arXiv 2611.24849, v1, read on 21 November 2026), Agichtein and colleagues have a frontier model turn relevance guidelines into one program per topic, for a task this book leaves to other books: labelling which documents answer a search. The authors report that on TREC DL 2019 to 2021 these programs agree with the NIST assessors at the level of Claude Sonnet 5.5 used as a judge. A program like that is written once, gives the same answer on every run and can be read line by line, which are the strengths this section claims for a code check.
 
-**Working rule:** Write a code check for a failure only when the reply and the item already hold the fact the check needs. For a failure whose evidence is the claim itself, send it to a judge with a written rubric, as [chapter 5](a-judge-with-a-rubric) does, and keep the code check for the parts of the failure that can be read.
+**Working rule:** Write a code check for a failure only when the reply, the item or the run already hold the fact the check needs. For a failure whose evidence is the claim itself, send it to a judge with a written rubric, as [chapter 5](a-judge-with-a-rubric) does, and keep the code check for the parts of the failure that can be read.
 
 ## Format checks {#format-checks}
 

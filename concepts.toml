@@ -501,7 +501,7 @@ section = "contamination"
 id = "code-check"
 term = "code check"
 context = "llm-evaluation"
-definition = "A code check reads two things: the reply's text, and the item's own data, which holds its reference answer and the list of sections that support it."
+definition = "A code check reads the reply's text and data the run already holds: the item's own data, which holds its reference answer and the list of sections that support it, the sections the prompt gave, and the docs' section IDs."
 section = "what-a-code-check-can-see"
 
 [concepts.relations]
