@@ -80,7 +80,7 @@ example = "twenty-questions"
 id = "bm25"
 term = "BM25"
 context = "retrieval-augmented-generation"
-definition = "The index is built with BM25, which scores each section by the words it shares with the question."
+definition = "The index is built with BM25, which scores each section by the words it shares with the question, giving rarer words more weight and long sections less."
 section = "retrieve-then-answer"
 example = "retrieve-top-sections"
 applies_to = ["bm25s"]
@@ -105,7 +105,7 @@ same-as = ["https://rollingedition.com/concepts/artificial-intelligence/recordin
 id = "citation-form"
 term = "citation form"
 context = "retrieval-augmented-generation"
-definition = "the citation form, a section ID in square brackets"
+definition = "the citation form, a section ID after `sec:` in square brackets, such as `[sec:no-fail-flag]`"
 section = "citations-in-code"
 example = "check-citations"
 
@@ -132,7 +132,6 @@ example = "check-declines"
 [[concepts]]
 id = "false-refusal"
 term = "false refusal"
-aliases = ["over-declining"]
 context = "llm-evaluation"
 definition = "A false refusal is an answerable item declined"
 section = "declines-in-code"
@@ -141,7 +140,6 @@ agrees = [{ book = "business-intelligence-with-agents", definition = "A declined
 
 [concepts.relations]
 contrasts-with = ["false-answer"]
-broader = ["failure-mode"]
 
 [[concepts]]
 id = "false-answer"
@@ -155,7 +153,7 @@ example = "check-declines"
 id = "judge"
 term = "judge"
 context = "llm-evaluation"
-definition = "a judge: a model that reads the question, a written reference answer and the assistant's reply, and returns PASS or FAIL"
+definition = "a judge: a model that grades a reply, here by reading the question, a written reference answer and the assistant's reply, and returns PASS or FAIL"
 section = "one-judge"
 example = "judge-one-answer"
 agrees = [{ book = "business-intelligence-with-agents", definition = "a judge, a model call that grades an answer against a rubric and returns a verdict" }]
@@ -179,7 +177,7 @@ computed-from = ["item"]
 id = "interval"
 term = "interval"
 aliases = ["95% interval"]
-definition = "An interval answers a different question from the pass rate: how far would the rate move if the set had been another twenty items drawn the same way?"
+definition = "An interval answers a different question from the pass rate: how far would the rate move if the set had been another set of as many items, drawn the same way?"
 section = "a-pass-rate-and-its-interval"
 example = "pass-rate-interval"
 
@@ -190,7 +188,7 @@ close-to = ["https://rollingedition.com/concepts/search-and-recommendation/confi
 [[concepts]]
 id = "percentile-bootstrap"
 term = "percentile bootstrap"
-definition = "The percentile bootstrap is the simplest interval built on resampling, the middle 95% of the resampled rates."
+definition = "The percentile bootstrap is the simplest interval built on resampling, the middle 95% of the resampled rates, or another share when a different level is chosen."
 section = "a-pass-rate-and-its-interval"
 example = "pass-rate-interval"
 
@@ -271,7 +269,7 @@ id = "near-miss-term"
 term = "near-miss term"
 aliases = ["near-miss-term"]
 context = "llm-evaluation"
-definition = "a planted near-miss term, a name close to one the docs use, which catches a careless reply"
+definition = "a planted near-miss term, a name that one version renamed or that the docs use for another concept, which catches a careless reply"
 section = "what-the-replies-look-like"
 example = "read-replies-dev"
 
@@ -404,7 +402,7 @@ id = "stale-answer"
 term = "stale answer"
 aliases = ["stale-answer"]
 context = "llm-evaluation"
-definition = "`stale-answer`: the answer sits under a section ID that a version filter removes, so a filter that is too strict misses it."
+definition = "`stale-answer`: the answer sits under a section ID that only the asked version has, so an answer built from an older version's docs is stale."
 section = "planted-items"
 
 [concepts.relations]
@@ -426,7 +424,7 @@ id = "held-out"
 term = "held-out"
 aliases = ["held-out items"]
 context = "llm-evaluation"
-definition = "held-out is used once, to report a result."
+definition = "held-out is used once for each comparison, to report a result."
 section = "dev-and-held-out"
 agrees = [{ book = "business-intelligence-with-agents", definition = "A held-out split is the usual defence: tune on one part, and score the other only when you report a result." }]
 
@@ -477,7 +475,7 @@ broader = ["public-benchmark"]
 id = "mc1"
 term = "MC1"
 context = "llm-evaluation"
-definition = "The book uses TruthfulQA's multiple-choice version, MC1: exactly one option is correct, and the model answers with a letter."
+definition = "The book uses TruthfulQA's multiple-choice version, MC1: exactly one option is correct, and here the model answers with a letter."
 section = "truthfulqa"
 example = "score-truthfulqa"
 
@@ -649,7 +647,7 @@ example = "fuzzy-match"
 [[concepts]]
 id = "bleu"
 term = "BLEU"
-definition = "Papineni and colleagues proposed BLEU in 2002 as a quick and inexpensive way to score machine translation."
+definition = "Papineni and colleagues proposed BLEU in 2002 as a quick and inexpensive way to score machine translation, from modified n-gram precision and a brevity penalty."
 section = "where-bleu-rouge-mislead"
 example = "overlap-misleads"
 wikidata = "Q3500773"
@@ -666,7 +664,7 @@ section = "where-bleu-rouge-mislead"
 [[concepts]]
 id = "rouge-1-f1"
 term = "ROUGE-1 F1"
-definition = "ROUGE-1 F1 counts single words."
+definition = "ROUGE-1 F1 counts the single words a candidate shares with its reference, as an F1."
 section = "where-bleu-rouge-mislead"
 example = "overlap-misleads"
 
@@ -677,7 +675,7 @@ computed-from = ["f1"]
 [[concepts]]
 id = "f1"
 term = "F1"
-definition = "F1, which combines recall with precision"
+definition = "F1, the harmonic mean of recall and precision"
 section = "where-bleu-rouge-mislead"
 example = "overlap-misleads"
 wikidata = "Q6975395"
@@ -707,7 +705,7 @@ close-to = ["https://rollingedition.com/concepts/large-language-models/system-me
 id = "template"
 term = "template"
 context = "llm-evaluation"
-definition = "The template wraps the request, the reference and the reply in markers, so the judge can tell them apart."
+definition = "The template wraps the request, the reply and any reference in markers, so the judge can tell them apart."
 section = "a-judge-with-a-rubric"
 
 [concepts.relations]
@@ -812,7 +810,7 @@ example = "pairwise-both-orders"
 id = "unreadable-verdict"
 term = "unreadable verdict"
 context = "llm-evaluation"
-definition = "an unreadable verdict means the judge gave no judgment at all."
+definition = "an unreadable verdict means the judge gave no judgment the code can read."
 section = "verdict-first"
 example = "parse-verdicts"
 

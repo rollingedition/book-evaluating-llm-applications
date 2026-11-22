@@ -48,7 +48,7 @@ Each trap is simple. `q-0003` asks whether `${project}` is the right placeholder
 
 The assistant doesn't read all the docs for every question. For each question it takes the three sections most likely to hold the answer, from the index of the version the question names, and answers from those three alone. A wrong answer can therefore come from two places: the right section was never retrieved, or the model misread the section it was given. A measurement that can't tell these apart can't say what to fix.
 
-The index is built with BM25, which scores each section by the words it shares with the question. The scoring runs through bm25s at {{version:bm25s}}. Take one question: whether an ignore entry such as `docs/**/*.tmp` catches a file two folders down in 1.1. Its output shows the words the index keeps from the question, and the top three sections, ordered by score and then by section ID.
+The index is built with BM25, which scores each section by the words it shares with the question, giving rarer words more weight and long sections less. The scoring runs through bm25s at {{version:bm25s}}. Take one question: whether an ignore entry such as `docs/**/*.tmp` catches a file two folders down in 1.1. Its output shows the words the index keeps from the question, and the top three sections, ordered by score and then by section ID.
 
 [Example: retrieve-top-sections](../examples/retrieve-top-sections.py)
 
@@ -78,7 +78,7 @@ Some errors need no judge. A citation to a section that wasn't in the prompt, or
 
 ### Citations {#citations-in-code}
 
-The assistant must cite every statement with the citation form, a section ID in square brackets, and it may cite only the IDs it was given. A citation can fail in two ways. The ID may not exist at all, or it may exist in another version, which is the mistake the version-swap items are written to provoke. The check calls a citation to any section that was not in the prompt `unknown-section`, whichever way it went wrong. It also flags an answer that has no citation.
+The assistant must cite every statement with the citation form, a section ID after `sec:` in square brackets, such as `[sec:no-fail-flag]`, and it may cite only the IDs it was given. A citation can fail in two ways. The ID may not exist at all, or it may exist in another version, which is the mistake the version-swap items are written to provoke. The check calls a citation to any section that was not in the prompt `unknown-section`, whichever way it went wrong. It also flags an answer that has no citation.
 
 The citation and format checks run over the twenty baseline replies, and the output counts each kind of failure.
 
@@ -104,7 +104,7 @@ The rates leave out {{out:check-declines:items not counted here (version-depende
 
 ## One judge {#one-judge}
 
-Citations and declines check the shape of a reply. They can't check whether the reply is right, and that's the question the team cares about. For that, the book uses a judge: a model that reads the question, a written reference answer and the assistant's reply, and returns PASS or FAIL. The judge here is Qwen3-4B-Instruct-2507, the same model that wrote the replies. A judge and an assistant that are one model can share blind spots, and then the judge misses the errors the assistant makes for the same reason. This book can't test for that with this setup. What it does instead is check the same model, under a calibration rubric, against public human ratings, and say what carrying those rates to this judge assumes, in [chapter 6](calibrate-the-judge).
+Citations and declines check the shape of a reply. They can't check whether the reply is right, and that's the question the team cares about. For that, the book uses a judge: a model that grades a reply, here by reading the question, a written reference answer and the assistant's reply, and returns PASS or [FAIL](#verdict-first). The judge here is Qwen3-4B-Instruct-2507, the same model that wrote the replies. A judge and an assistant that are one model can share blind spots, and then the judge misses the errors the assistant makes for the same reason. This book can't test for that with this setup. What it does instead is check the same model, under a calibration rubric, against public human ratings, and say what carrying those rates to this judge assumes, in [chapter 6](calibrate-the-judge).
 
 The judge's rules are short, and they're worth reading in full. A reply is correct only if it says what the reference says. Other words are fine, and so is extra detail that doesn't contradict the reference. A reply that says something the reference doesn't support, or contradicts it, fails. If the reference has more than one reading, the reply must answer every one of them, and a partial answer fails. If the reference is "none", the docs don't answer, and the only correct reply is the decline. A reply that gives an answer and also the decline phrase fails. The judge writes its verdict on the first line and a short reason after it. The prompt asks for one sentence, and the judge doesn't always stop there.
 
@@ -126,7 +126,7 @@ A pass rate is a count divided by a denominator, and the denominator decides wha
 pass rate = passed items / items
 ```
 
-An interval answers a different question from the pass rate: how far would the rate move if the set had been another twenty items drawn the same way? The method is a percentile bootstrap. The bootstrap itself is Efron's: his 1979 paper [*Bootstrap Methods: Another Look at the Jackknife*](https://doi.org/10.1214/aos/1176344552), in the *Annals of Statistics*, set out resampling as a way to estimate how much a statistic varies. The percentile bootstrap is the simplest interval built on resampling, the middle 95% of the resampled rates. The procedure draws items from the set with replacement, without regard to kind, so one draw can hold any mix of kinds. It computes the pass rate of each draw, and repeats the draws many times. The interval shows how much twenty items could say.
+An interval answers a different question from the pass rate: how far would the rate move if the set had been another set of as many items, drawn the same way? The method is a percentile bootstrap. The bootstrap itself is Efron's: his 1979 paper [*Bootstrap Methods: Another Look at the Jackknife*](https://doi.org/10.1214/aos/1176344552), in the *Annals of Statistics*, set out resampling as a way to estimate how much a statistic varies. The percentile bootstrap is the simplest interval built on resampling, the middle 95% of the resampled rates, or another share when a different level is chosen. The procedure draws items from the set with replacement, without regard to kind, so one draw can hold any mix of kinds. It computes the pass rate of each draw, and repeats the draws many times. The interval shows how much twenty items could say.
 
 Compute the rate and its interval for the baseline, then break the rate down by kind.
 
