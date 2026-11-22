@@ -98,7 +98,7 @@ The example resamples both the dev rows and the readable items, 2,000 times, wit
 
 [Example: figure-corrected-resamples](../examples/figure-corrected-resamples.py)
 
-{{fig:corrected-resamples}} shows those resamples as bars. The bar at the cap, drawn beside the 100% line, is taller than any bin below it: resamples at the cap are {{out:figure-corrected-resamples:resamples at the 100% cap}}, and the fullest bin below the cap holds {{out:figure-corrected-resamples:resamples in the fullest bin below the cap}}. The interval's upper end is that cap, so the top of the interval reports the cap, not an estimate of the rate.
+{{fig:corrected-resamples}} shows those resamples as bars. The bar at the cap, drawn beside the 100% line, is taller than any bin below it. The bins below the cap are {{out:figure-corrected-resamples:bin width below the cap, in points}} points wide, and the fullest one holds {{out:figure-corrected-resamples:resamples in the fullest bin below the cap}} resamples.
 
 The one-row moves are these. If one dev row that humans passed had been judged PASS rather than FAIL, TPR would be one row higher, and the corrected rate would be {{out:correction-sensitivity:corrected, TPR one row higher}}. If one such row had been judged FAIL, TPR would be one row lower, and the corrected rate would be {{out:correction-sensitivity:corrected, TPR one row lower}}. For TNR, one dev row that humans failed and the judge passed would change the rate to {{out:correction-sensitivity:corrected, TNR one row higher}} if it were judged FAIL, and to {{out:correction-sensitivity:corrected, TNR one row lower}} if it were judged PASS. TPR is the rate to watch: one row there moves the answer by four to five points, while one row of TNR moves it by about half a point.
 

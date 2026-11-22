@@ -20,32 +20,31 @@ lo, hi, capped, refused = correction_interval(dev_rows, item_passes)
 # correction_interval keeps only the ends: this redraws its resamples, with the same generator, seed and draw order.
 judge, human = (np.array([getattr(j, f) for j in dev_rows], dtype=bool) for f in ("judge_pass", "human_pass"))
 rng = np.random.default_rng(lib.SEED)
-dev = rng.integers(0, judge.size, size=(RESAMPLES, judge.size))  # dev rows first
-item = rng.integers(0, item_passes.size, size=(RESAMPLES, item_passes.size))  # readable items second
+dev, item = (rng.integers(0, n, size=(RESAMPLES, n)) for n in (judge.size, item_passes.size))  # dev rows first, readable items second
 pass_s, fail_s = human[dev].sum(axis=1), (~human[dev]).sum(axis=1)
 tpr = (judge[dev] & human[dev]).sum(axis=1) / np.maximum(pass_s, 1)  # a resample with no PASS row is refused below
 tnr = (~judge[dev] & ~human[dev]).sum(axis=1) / np.maximum(fail_s, 1)
 usable = (pass_s > 0) & (fail_s > 0) & (tpr + tnr - 1.0 >= MIN_DENOMINATOR)
-rates = np.clip((item_passes[item].mean(axis=1)[usable] + tnr[usable] - 1.0) / (tpr + tnr - 1.0)[usable], 0.0, 1.0)  # at the cap
+rates = np.clip((item_passes[item].mean(axis=1)[usable] + tnr[usable] - 1.0) / (tpr + tnr - 1.0)[usable], 0.0, 1.0)  # clipped to [0, 1] as correction_interval clips it
 
 assert np.allclose(np.quantile(rates, [0.025, 0.975]), [lo, hi]) and hi == 1.0, "the resamples must give the interval"
 assert int((~usable).sum()) == refused and int((rates >= 1.0).sum()) == capped, "counts must match correction-sensitivity"
-edges = np.append(np.arange(np.floor(rates[rates < 1.0].min() / 0.02) * 0.02, 1.0, 0.02), 1.0)  # two-point bins below the cap
-counts, _ = np.histogram(rates[rates < 1.0], bins=edges)
+BIN = 0.02  # the width of each bin below the cap, in rate units: two points
+counts, edges = np.histogram(rates[rates < 1.0], bins=np.append(np.arange(np.floor(rates[rates < 1.0].min() / BIN) * BIN, 1.0, BIN), 1.0))  # bins below the cap, BIN wide
 assert counts.sum() + capped == rates.size and capped > counts.max(), "every kept resample must be drawn, the cap tallest"
 
 print(f"corrected pass rate, 95% interval: {interval_pct(lo, hi)}")
 print(f"resamples at the 100% cap: {pct(capped, RESAMPLES)}")
 print(f"resamples refused, TPR + TNR - 1 below 0.1: {pct(refused, RESAMPLES)}")
 print(f"resamples in the fullest bin below the cap: {counts.max()}")
+print(f"bin width below the cap, in points: {BIN * 100:.0f}")
 
 fig, ax = new_figure(height=2.8)
-ax.bar((edges[:-1] + edges[1:]) / 2, counts, width=0.016, color=ACCENT, label="resamples below the cap")
-ax.bar(1.02, capped, width=0.016, color=INK, label="resamples at the 100% cap")  # just past the 100% line, clear of the bins
-ax.axvline(lo, color=MUTED, linestyle="--", label="ends of the middle 95%")
-ax.axvline(hi, color=MUTED, linestyle="--")  # the upper end is the cap itself
+ax.bar((edges[:-1] + edges[1:]) / 2, counts, width=0.016, color=INK, label="resamples below the cap")
+ax.bar(1.02, capped, width=0.016, color=ACCENT, label="resamples at the 100% cap")  # just past the 100% line, clear of the bins
+ax.text(1.02, capped, "cap", ha="center", va="bottom")  # names the bar, so it can't be read as rates above 100%
+ax.vlines([lo, hi], 0, 1, transform=ax.get_xaxis_transform(), color=MUTED, linestyle="--", label="ends of the middle 95%")  # full height; the upper end is the cap itself
 ax.xaxis.set_major_formatter(PercentFormatter(xmax=1.0))
-ax.set_xlabel("corrected pass rate, clipped to 0% to 100%")
-ax.set_ylabel("resamples")
+ax.set(xlabel="corrected pass rate, clipped to 0% to 100%", ylabel="resamples")
 ax.legend(frameon=False, loc="lower left", bbox_to_anchor=(0.0, 1.0), ncol=2)  # above the plot, where no bar or line crosses it
 save(fig, "corrected-resamples")

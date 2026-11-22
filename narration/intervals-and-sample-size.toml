@@ -12,6 +12,9 @@ say = "The code runs prompt B against the baseline on the dev items. It leaves o
 [examples.held-out-variants]
 say = "The code compares each of three variants with the baseline on the held-out items, each variant once. It works out the share of the error budget each comparison gets, which sets the level of each interval, and how many resamples lie beyond each end of an interval. For each variant it prints the difference, the interval, the number of paired items and the reading. The reading for prompt B is {{out:held-out-variants:prompt-b minus baseline, reading}}."
 
+[examples.figure-held-out-intervals]
+say = "The code redraws the resamples behind each held-out comparison, with the same generator and seed as held-out-variants, and takes the middle 95 percent from the same draw as well as the interval at the held-out level. It prints each variant's difference, both intervals, the width of each, the number of paired items and the reading at each level. At 95 percent, prompt B's interval is {{out:figure-held-out-intervals:prompt-b minus baseline, 95% interval}}."
+
 [examples.sample-size]
 say = "The code takes the dev items on which prompt B and the baseline both have a readable verdict, and works out the share of items on which the two disagree. From that share it gives the number of items needed to show a five point difference and a ten point difference, with 95 percent confidence and 80 percent power. It also gives the smallest difference that twenty items detect with 80 percent power at 95 percent confidence, assuming a change disagrees with the baseline on about as many items as prompt B did, which is {{out:sample-size:share of discordant items, P2 and P1 disagree}}. It then repeats the calculation using only the sampling noise within each item, as a floor. The share of disagreeing items is {{out:sample-size:share of discordant items, P2 and P1 disagree}}."
 

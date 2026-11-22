@@ -84,6 +84,14 @@ Dev gave {{out:paired-prompt-b:difference, P2 minus P1}} for the same prompt, an
 
 By the rule, all three read as no difference detected. For prompt B the printed reading is {{out:held-out-variants:prompt-b minus baseline, reading}}. For k5 it is {{out:held-out-variants:k5 minus baseline, reading}}, and for unfiltered {{out:held-out-variants:unfiltered minus baseline, reading}}.
 
+{{fig:held-out-intervals}} draws the three comparisons, with each variant's held-out interval in the accent and its 95% interval from the same resamples in ink.
+
+![Each held-out interval is wider than its 95% one, and only prompt B's 95% interval lies wholly above zero](../examples/figures/held-out-intervals.svg "Each variant's difference from the baseline, with its two intervals")
+
+[Example: figure-held-out-intervals](../examples/figure-held-out-intervals.py)
+
+Each held-out interval is wider than its 95% one from the same resamples. At 95%, prompt B's interval would be {{out:figure-held-out-intervals:prompt-b minus baseline, 95% interval}}, and it would read {{out:figure-held-out-intervals:prompt-b minus baseline, reading at 95%}}.
+
 Prompt B is the close case. Its interval is {{out:held-out-variants:prompt-b minus baseline, 98.33% interval}}, and its lower end is exactly zero. The reading rule says better only when the whole interval sits above zero, and this one reaches zero without clearing it, so by the rule the reading is no difference detected. Beyond each end of the interval lie {{out:held-out-variants:resamples beyond each end of an interval}} of the 2,000 resamples, so the call sits on the line. The seed was fixed before the run for that reason. A reader could argue that a point estimate of that size should count for something, and this section doesn't make that argument. The rule was set before the run, the comparison runs once, and nobody gets to look at these three again with a lower level or a different reading. If prompt B is to be tested further, it needs a fresh held-out set, sized by [How many questions a difference needs](#how-many-questions) and fixed before anyone sees its results, read on its own. Adding items to the {{out:sample-size-limits:held-out items (n)}} already read, and rereading the pool, would be a second look at a result already seen.
 
 **Working rule:** Fix the variants, the level and the reading rule before you open the held-out set, and run each comparison once. An interval that reaches zero is no difference detected at that n. Don't rerun the comparison, lower the level or change the reading to get a different answer. Add held-out items only before they are scored.

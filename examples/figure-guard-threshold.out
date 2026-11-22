@@ -1,0 +1,5 @@
+threshold chosen by the dev rule: 0.00
+at the chosen threshold, false refusal rate: 12.5% (5 of 40)
+at the chosen threshold, false answer rate: 15.4% (2 of 13)
+lowest sum of the two rates: 27.9%
+figure: figures/guard-threshold.svg

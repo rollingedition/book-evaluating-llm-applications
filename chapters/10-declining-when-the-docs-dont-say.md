@@ -79,6 +79,12 @@ The false answers don't fall until 4.00, where the false answer rate is {{out:tu
 
 No line of the sweep lowers both rates below the no-guard line. Each threshold that lowers the false answers raises the false refusals, and each threshold that leaves the refusals alone leaves the answers alone. On dev, the guard makes a trade and no improvement.
 
+![Raising the threshold trades false answers for false refusals](../examples/figures/guard-threshold.svg "The two rates and their sum at each threshold, on dev")
+
+[Example: figure-guard-threshold](../examples/figure-guard-threshold.py)
+
+{{fig:guard-threshold}} draws both rates against the threshold, with the dashed sum and the pick marked. The sum is lowest at the pick, {{out:figure-guard-threshold:lowest sum of the two rates}}, and no threshold on the grid is lower.
+
 The sweep also shows the limit of the score. The top score of `q-0018` is {{out:tune-guard-dev:top score of recorded false answer q-0018}}, and the top score of `q-0039` is {{out:tune-guard-dev:top score of recorded false answer q-0039}}. A threshold catches `q-0018` only from 4.00 up, where the false refusal rate is already {{out:tune-guard-dev:threshold 4.00, false refusal rate}}. It catches `q-0039` only from 4.75 up. No cut catches both answered items with fewer than half of the answerable items declined. The likely cause is the score itself: it counts shared words, and a section about the same command can share many words with a question that section doesn't answer. That is a reading of the sweep, not a measured fact. Testing it would mean scoring the items by hand, which this chapter does not do.
 
 The rule's pick is {{out:tune-guard-dev:threshold chosen by the dev rule}}. At that threshold the false refusal rate is {{out:tune-guard-dev:at the chosen threshold, false refusal rate}}. The false answer rate is {{out:tune-guard-dev:at the chosen threshold, false answer rate}}. Both are the same as the recorded replies with no guard. The pick is a tie-break, not a finding. The lines from 0.00 to 2.00 have the same sum, and the rule takes the lowest of them, so the guard the rule chooses is no guard.
