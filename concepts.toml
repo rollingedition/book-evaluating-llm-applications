@@ -153,7 +153,7 @@ example = "check-declines"
 id = "judge"
 term = "judge"
 context = "llm-evaluation"
-definition = "a judge: a model that grades a reply, here by reading the question, a written reference answer and the assistant's reply, and returns PASS or FAIL"
+definition = "a judge: a model that grades a reply, here by reading the question, a written reference answer and the assistant's reply, and returning PASS or FAIL"
 section = "one-judge"
 example = "judge-one-answer"
 agrees = [{ book = "business-intelligence-with-agents", definition = "a judge, a model call that grades an answer against a rubric and returns a verdict" }]
@@ -1200,7 +1200,7 @@ same-as = ["https://rollingedition.com/concepts/data-governance/gate"]
 id = "upper-bound"
 term = "upper bound"
 context = "llm-evaluation"
-definition = "The upper bound is the most favourable reading of the candidate the interval allows"
+definition = "The upper bound is the most favourable reading the interval allows for the candidate"
 section = "a-gate-that-respects-the-interval"
 example = "gate-real-drop"
 

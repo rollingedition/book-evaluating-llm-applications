@@ -38,9 +38,9 @@ fig, ax = new_figure(height=2.4)
 ax.hlines(rows, right, wrong, color=MUTED, linewidth=1)  # the grey line joins each pair's two markers
 ax.scatter(wrong, rows, color=ACCENT, marker="o", s=36, label="wrong answer")
 ax.scatter(right, rows, color=INK, marker="D", s=24, label="right answer")
-ax.set(title="ROUGE-1 F1 for each pair", xlim=(0, 1), xlabel="ROUGE-1 F1, 0 to 1",
+ax.set(xlim=(0, 1), xlabel="ROUGE-1 F1, 0 to 1",
        yticks=rows, yticklabels=[f"pair {i}" for i in range(1, len(PAIRS) + 1)])
-fig.legend(*ax.get_legend_handles_labels(), loc="outside lower center", ncol=2)
+ax.legend(frameon=False, loc="lower left", bbox_to_anchor=(0.0, 1.0), ncol=2)  # above the plot, where no marker crosses it
 
 higher = sum(g > 0 for g in gaps)  # a gap above zero means the wrong answer scored higher
 assert higher == len(PAIRS), f"higher in only {higher} pairs"

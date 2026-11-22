@@ -42,7 +42,7 @@ print(f"bin width below the cap, in points: {BIN * 100:.0f}")
 fig, ax = new_figure(height=2.8)
 ax.bar((edges[:-1] + edges[1:]) / 2, counts, width=0.016, color=INK, label="resamples below the cap")
 ax.bar(1.02, capped, width=0.016, color=ACCENT, label="resamples at the 100% cap")  # just past the 100% line, clear of the bins
-ax.text(1.02, capped, "cap", ha="center", va="bottom")  # names the bar, so it can't be read as rates above 100%
+ax.text(1.024, capped, "cap", ha="left", va="bottom")  # names the bar, starting clear of the 100% line at its left
 ax.vlines([lo, hi], 0, 1, transform=ax.get_xaxis_transform(), color=MUTED, linestyle="--", label="ends of the middle 95%")  # full height; the upper end is the cap itself
 ax.xaxis.set_major_formatter(PercentFormatter(xmax=1.0))
 ax.set(xlabel="corrected pass rate, clipped to 0% to 100%", ylabel="resamples")

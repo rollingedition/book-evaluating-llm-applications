@@ -1,6 +1,6 @@
 """Draws the dev false refusal rate and false answer rate against the guard's threshold, with their sum dashed and the
 rule's pick marked. The printed lines are the first threshold, the last threshold at the lowest sum, and that sum. The
-asserts check that the pick is the rule's, that the sum is lowest up to 2.00 and higher after, that a higher threshold
+asserts check that the pick is the rule's, that the sum is lowest up to its last tie and higher after, that a higher threshold
 never lowers the false refusals or raises the false answers, and that both rates change across the sweep."""
 import lib  # first: fixes the thread counts and seeds before anything else loads
 
@@ -19,15 +19,16 @@ for threshold in GRID:
     total.append(Fraction(len(refusals), answerable) + Fraction(len(answers), unanswerable))  # exact, so ties are real
 
 chosen = pick_threshold(dev)
-flat = GRID.index(2.0) + 1  # the sum ties at its lowest from the first threshold through 2.00, as the prose says
+lowest = min(total)
+last_tie = max(i for i, t in enumerate(total) if t == lowest)  # the last grid index at the lowest sum, read from the data
 print(f"first threshold on the grid: {GRID[0]:.2f}")
-print(f"last threshold at the lowest sum: {GRID[flat - 1]:.2f}")  # the prose says the sum stays lowest up to here
-print(f"lowest sum of the two rates: {100 * float(min(total)):.1f}%")
+print(f"last threshold at the lowest sum: {GRID[last_tie]:.2f}")
+print(f"lowest sum of the two rates: {100 * float(lowest):.1f}%")
 
 # The section's conclusion, that the rule's pick is no guard, rests on this: at 0.00 no score falls below the threshold.
 assert chosen == 0.0, f"tune-guard-dev's recorded pick is 0.00, not {chosen:.2f}"
-assert chosen == GRID[total.index(min(total))], "the pick is the lowest threshold with the smallest sum"
-assert set(total[:flat]) == {min(total)} and min(total[flat:]) > min(total), "the sum must be lowest up to 2.00 and higher after"
+assert chosen == GRID[total.index(lowest)], "the pick is the lowest threshold with the smallest sum"
+assert set(total[:last_tie + 1]) == {lowest} and min(total[last_tie + 1:]) > lowest, "the sum must be lowest up to the last tie and higher after"  # the slice includes the last tie
 # Raising the threshold only adds declines: refusals never fall, answers never rise. The figure's trade rests on this.
 assert all(a <= b for a, b in zip(refusal, refusal[1:])), "a higher threshold must not lower the false refusal rate"
 assert all(a >= b for a, b in zip(answer, answer[1:])), "a higher threshold must not raise the false answer rate"
@@ -42,6 +43,6 @@ ax.text(chosen + 0.2, 3, f"rule's pick: {chosen:.2f}", color=MUTED)  # low on th
 ax.set_xlim(-0.5, 10.5)
 ax.set_ylim(0, 105)
 ax.set_xlabel("guard threshold: a top score below it is declined")
-ax.set_ylabel("percent of items of that kind")
-ax.legend(frameon=False, loc="upper left")  # the top-left corner is empty for every line
+ax.set_ylabel("rate on dev, in percent points")  # the dashed sum is two rates added, so it is in points too
+ax.legend(frameon=False, loc="lower left", bbox_to_anchor=(0.0, 1.0), ncol=3)  # above the plot, where no line crosses it
 save(fig, "guard-threshold")
