@@ -94,6 +94,12 @@ The result is also close to the code's ceiling. The code clips the corrected rat
 
 The example resamples both the dev rows and the readable items, 2,000 times, with the book's fixed seed, and it reads the spread of the corrected rate. The 95% interval is {{out:correction-sensitivity:corrected pass rate, 95% interval}}. It is wide, because TPR and TNR each rest on a few dozen dev rows, and its upper end is the cap itself. Some resamples reach the cap. Their share is {{out:correction-sensitivity:resamples at the 100% cap}}. Resamples refused for a denominator under 0.1 are {{out:correction-sensitivity:resamples refused, TPR + TNR - 1 below 0.1}}, and the interval is taken over the rest.
 
+![The resamples pile up at the 100% cap, a bar taller than any bin below it, so the interval's top end is the cap](../examples/figures/corrected-resamples.svg "The corrected pass rate over the bootstrap resamples, with the cap and the interval's ends")
+
+[Example: figure-corrected-resamples](../examples/figure-corrected-resamples.py)
+
+{{fig:corrected-resamples}} shows those resamples as bars. The bar at the cap, drawn beside the 100% line, is taller than any bin below it: resamples at the cap are {{out:figure-corrected-resamples:resamples at the 100% cap}}, and the fullest bin below the cap holds {{out:figure-corrected-resamples:resamples in the fullest bin below the cap}}. The interval's upper end is that cap, so the top of the interval reports the cap, not an estimate of the rate.
+
 The one-row moves are these. If one dev row that humans passed had been judged PASS rather than FAIL, TPR would be one row higher, and the corrected rate would be {{out:correction-sensitivity:corrected, TPR one row higher}}. If one such row had been judged FAIL, TPR would be one row lower, and the corrected rate would be {{out:correction-sensitivity:corrected, TPR one row lower}}. For TNR, one dev row that humans failed and the judge passed would change the rate to {{out:correction-sensitivity:corrected, TNR one row higher}} if it were judged FAIL, and to {{out:correction-sensitivity:corrected, TNR one row lower}} if it were judged PASS. TPR is the rate to watch: one row there moves the answer by four to five points, while one row of TNR moves it by about half a point.
 
 The interval covers the sampling of the dev rows and the readable items. It does not cover the transfer assumption. A judge whose errors differ on sablefile's replies could move the rate by more than the resamples show.

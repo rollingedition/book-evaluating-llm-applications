@@ -1,0 +1,5 @@
+replies read as PASS: 49
+replies read as FAIL: 7
+median words, PASS: 23
+median words, FAIL: 20
+figure: figures/length-by-verdict.svg

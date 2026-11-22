@@ -68,6 +68,12 @@ The middle band passed {{out:length-and-verdicts:15 to 29 words}}.
 
 The longest band passed {{out:length-and-verdicts:30 words or more}}.
 
+{{fig:length-by-verdict}} sorts the same replies by verdict instead of by band. The median PASS reply has {{out:figure-length-by-verdict:median words, PASS}} words and the median FAIL reply {{out:figure-length-by-verdict:median words, FAIL}}, and every FAIL reply falls inside the range the PASS replies cover. With {{out:figure-length-by-verdict:replies read as FAIL}} FAIL replies, a gap of a few words between the medians does not show a trend.
+
+![FAIL replies spread across the same lengths as PASS replies, and the two medians sit close together.](../examples/figures/length-by-verdict.svg "Each answered reply's word count, by the judge's verdict")
+
+[Example: figure-length-by-verdict](../examples/figure-length-by-verdict.py)
+
 The comparison the book reports is the longest band minus the shortest. Its order is fixed by length, so it is set before anyone reads the rates. The highest-rate band minus the lowest-rate band would be chosen after the rates are seen, and it could never fall below zero. The gap is {{out:verdict-limits:length gap, longest band minus shortest band}}.
 
 The method is {{out:verdict-limits:length gap method}}. The two bands hold different items, so each is resampled on its own, and the bands' counts are the ones in their rates above. The band counts are small, so the interval is wide. The interval includes zero, so the result is [no difference detected](#paired-comparisons) between the longest and the shortest band.
