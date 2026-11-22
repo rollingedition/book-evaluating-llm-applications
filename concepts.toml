@@ -199,7 +199,7 @@ same-as = ["https://rollingedition.com/concepts/search-and-recommendation/percen
 [[concepts]]
 id = "paired-comparison"
 term = "paired comparison"
-definition = "A paired comparison subtracts, for each item, the verdict of the baseline from the verdict of prompt B, and averages the differences over the set."
+definition = "A paired comparison subtracts, for each item, the verdict of the baseline from the verdict of the variant, here prompt B, and averages the differences over the set."
 section = "paired-comparisons"
 example = "paired-prompt-b"
 
@@ -851,7 +851,7 @@ close-to = ["https://rollingedition.com/concepts/search-and-recommendation/cohen
 [[concepts]]
 id = "paired-difference"
 term = "paired difference"
-definition = "The paired difference is rubric B's score minus rubric A's, averaged over the dev rows"
+definition = "The paired difference is the variant's score minus the baseline's, here rubric B's agreement score minus rubric A's, averaged over the dev rows"
 section = "agreement-and-kappa"
 example = "rubric-b-agreement"
 
@@ -901,7 +901,7 @@ id = "corrected-pass-rate"
 term = "corrected pass rate"
 aliases = ["corrected rate"]
 context = "llm-evaluation"
-definition = "The corrected rate estimates the share of sablefile's replies that a person would pass, under the book's correctness cut."
+definition = "The corrected rate estimates the share of sablefile's readable replies that a person would pass, under the book's correctness cut."
 formula = "(observed + TNR - 1) / (TPR + TNR - 1)"
 section = "correcting-a-pass-rate"
 example = "corrected-pass-rate"
@@ -942,7 +942,7 @@ id = "length"
 term = "length"
 aliases = ["verbosity bias"]
 context = "llm-evaluation"
-definition = "length: whether the pass rate rises with the length of the reply."
+definition = "length: whether the pass rate rises with the length of a reply that says no more."
 section = "when-the-judge-stops-being-reliable"
 
 [concepts.relations]
@@ -952,7 +952,7 @@ contrasts-with = ["position"]
 id = "self-preference"
 term = "self-preference"
 context = "llm-evaluation"
-definition = "self-preference: whether the judge favours answers written by its own model."
+definition = "self-preference: whether the judge favours answers written by its own model over answers of equal quality."
 section = "when-the-judge-stops-being-reliable"
 agrees = [{ book = "business-intelligence-with-agents", definition = "Self-preference, a judge that \"scores its own outputs higher than others' while human annotators consider them of equal quality\" (Panickssery et al.), is a known bias" }]
 
@@ -996,7 +996,7 @@ section = "paired-comparisons"
 [[concepts]]
 id = "no-difference-detected"
 term = "no difference detected"
-definition = "No difference detected is a finding about a set at its size."
+definition = "No difference detected, the reading when the interval includes zero, is a finding about a set at its size."
 section = "paired-comparisons"
 example = "paired-prompt-b"
 
@@ -1029,7 +1029,7 @@ same-as = ["https://rollingedition.com/concepts/search-and-recommendation/bonfer
 id = "citation-accuracy"
 term = "citation accuracy"
 context = "retrieval-augmented-generation"
-definition = "Citation accuracy asks whether each citation names a section the item lists as supporting."
+definition = "Citation accuracy asks whether each citation names a section the item lists as supporting in the asked version."
 section = "grounded-answers"
 
 [concepts.relations]
@@ -1040,7 +1040,7 @@ close-to = ["https://rollingedition.com/concepts/search-and-recommendation/attri
 id = "faithfulness"
 term = "faithfulness"
 context = "retrieval-augmented-generation"
-definition = "Faithfulness asks whether each claim is in the sections the assistant was shown."
+definition = "Faithfulness asks whether each claim follows from the sections the assistant was shown."
 section = "grounded-answers"
 
 [concepts.relations]
@@ -1051,7 +1051,7 @@ same-as = ["https://rollingedition.com/concepts/search-and-recommendation/faithf
 id = "version-correctness"
 term = "version-correctness"
 context = "retrieval-augmented-generation"
-definition = "Version-correctness asks whether the answer fits the asked version."
+definition = "Version-correctness asks whether the answer matches the reference for the asked version."
 section = "grounded-answers"
 
 [[concepts]]
@@ -1068,7 +1068,7 @@ computed-from = ["outcome", "path"]
 id = "grounded"
 term = "grounded"
 context = "retrieval-augmented-generation"
-definition = "An answer is grounded when a reader who follows its citations finds the claim where the citation says it is, in the version they asked about."
+definition = "An answer is grounded when a reader who follows its citations finds each of its claims where the citation says it is, in the version they asked about."
 section = "what-grounded-means"
 
 [concepts.relations]
@@ -1089,7 +1089,7 @@ close-to = ["https://rollingedition.com/concepts/search-and-recommendation/citat
 id = "citation-rate"
 term = "citation rate"
 context = "retrieval-augmented-generation"
-definition = "The citation rate counts every citation in answered items that is supported."
+definition = "The citation rate is the share of all citations in answered items that are supported."
 section = "citation-accuracy"
 example = "citation-accuracy-counts"
 
@@ -1100,7 +1100,7 @@ contrasts-with = ["item-rate"]
 id = "item-rate"
 term = "item rate"
 context = "retrieval-augmented-generation"
-definition = "The item rate counts an answered item once if at least one of its citations is supported, so one good citation carries the item."
+definition = "The item rate counts an answered item once if at least one of its citations is supported, over all answered items, so one good citation carries the item."
 section = "citation-accuracy"
 example = "citation-accuracy-counts"
 
@@ -1111,7 +1111,7 @@ computed-from = ["llm-evaluation/supported"]
 id = "judged-correct-rate"
 term = "judged-correct rate"
 context = "llm-evaluation"
-definition = "The judged-correct rate is the count for version-dependent items alone, so a version miss shows on its own line, and a team can see whether a change to retrieval moved it."
+definition = "The judged-correct rate is the pass rate for version-dependent items alone, so a version miss shows on its own line, and a team can see whether a change to retrieval moved it."
 section = "version-correctness"
 example = "version-correct-answers"
 
@@ -1182,7 +1182,7 @@ computed-from = ["bm25"]
 id = "xstest"
 term = "XSTest"
 context = "llm-evaluation"
-definition = "XSTest is a test suite of safe prompts that look unsafe."
+definition = "XSTest is a test suite of safe prompts that look unsafe, with unsafe prompts beside them as contrasts."
 section = "outside-this-book"
 
 [[concepts]]
@@ -1200,7 +1200,7 @@ same-as = ["https://rollingedition.com/concepts/data-governance/gate"]
 id = "upper-bound"
 term = "upper bound"
 context = "llm-evaluation"
-definition = "The upper bound is the least negative reading the data still allows"
+definition = "The upper bound is the most favourable reading of the candidate the interval allows"
 section = "a-gate-that-respects-the-interval"
 example = "gate-real-drop"
 
