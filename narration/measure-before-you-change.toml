@@ -36,6 +36,9 @@ say = "The code passes the same twenty items through both prompts and compares t
 [examples.twenty-cannot-tell]
 say = "The code counts the items on which the two prompts' verdicts differ, and prints the paired difference with its interval and the width of that interval. It then checks that the interval includes zero. The verdicts differ on {{out:twenty-cannot-tell:items where the two verdicts differ}} items, and the interval is {{out:twenty-cannot-tell:interval width}} wide."
 
+[examples.figure-twenty-difference]
+say = "The code draws the same bootstrap resamples again, with the same seed and number of resamples, and checks that they give the interval the previous example prints. It also checks that every resample is a whole number of steps, and that the middle 95% reaches past zero on both sides. It then plots how many resamples land on each possible difference, marking zero and the ends of the interval. It prints the number of resamples, the items whose verdicts differ, the interval with its width, the step between possible differences, and the most common difference with the number of resamples at it. The resamples number {{out:figure-twenty-difference:bootstrap resamples}}, the step is {{out:figure-twenty-difference:step between possible differences}}, the most common difference is {{out:figure-twenty-difference:most common difference}}, with {{out:figure-twenty-difference:resamples at the most common difference}} resamples, and the interval is {{out:figure-twenty-difference:95% interval of the difference}}."
+
 [[blocks]]
 section = "a-pass-rate-and-its-interval"
 starts = "pass rate = passed items / items"

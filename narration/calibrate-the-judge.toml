@@ -18,6 +18,9 @@ say = "The code takes the baseline's answer-judge verdicts for the test items, l
 [examples.correction-sensitivity]
 say = "The code resamples the dev rows and the readable test items 2,000 times with the book's fixed seed, and prints a 95 percent interval for the corrected rate, which is {{out:correction-sensitivity:corrected pass rate, 95% interval}}. It counts the resamples that reach the cap of 100 percent, and the resamples it refuses for a denominator under 0.1. Then it moves one dev row at a time, first TPR and then TNR, and prints the corrected rate each time: {{out:correction-sensitivity:corrected, TPR one row higher}} for one row higher on TPR, and {{out:correction-sensitivity:corrected, TPR one row lower}} for one row lower."
 
+[examples.figure-corrected-resamples]
+say = "The code redraws the 2,000 resamples of the correction interval with the same seed and draw order, so it keeps the same resamples. It prints the interval, the share at the cap and the refused count, which are the lines correction-sensitivity prints. It sorts the resamples below the cap into two-point bins, and the fullest bin holds {{out:figure-corrected-resamples:resamples in the fullest bin below the cap}}, against the {{out:figure-corrected-resamples:resamples at the 100% cap}} at the cap."
+
 [examples.pairwise-agreement]
 say = "The code reads the judge's verdict for each HelpSteer2 preference pair in both orders, and counts agreement with the human preference in the A,B order alone, in the B,A order alone, and in both orders together. The order-changed pairs, labelled flipped in the output, are printed beside the both-orders rate. On dev, agreement in both orders is {{out:pairwise-agreement:agreement, both orders, dev}}. Each split also prints an interval over pairs."
 

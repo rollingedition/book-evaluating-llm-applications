@@ -55,9 +55,9 @@ description: "Use when evaluating an LLM application, in Python, with examples b
 
 ## Write code checks
 
-**When:** a failure can be read from the reply and the item alone: a format, a citation ID, a decline.
+**When:** a failure can be read from the reply, the item or the run: a format, a citation ID, a decline.
 
-1. Write a code check only when the reply and item hold the fact it needs. Send claim-level failures to a judge ([What a code check can see](#what-a-code-check-can-see)).
+1. Write a code check only when the reply, item or run holds the fact it needs. Send claim-level failures to a judge ([What a code check can see](#what-a-code-check-can-see)).
 2. Run format and order checks on every reply before a judge reads it, and report counts per split ([Format checks](#format-checks)).
 3. Count a citation as supported only when its ID is on the item's list. Read each unlisted citation against its section before you call it a problem ([Support](#citation-support)).
 4. Whether a listed section supports its sentence is a judgement the ID check cannot make. Read it, or use the answer-level faithfulness judge ([Faithfulness](#faithfulness)).

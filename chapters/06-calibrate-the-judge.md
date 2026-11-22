@@ -44,7 +44,7 @@ Chapter 5 described a second calibration wording, rubric B. The calibration rubr
 
 [Example: rubric-b-agreement](../examples/rubric-b-agreement.py)
 
-No difference shown on dev. Agreement under rubric B is {{out:rubric-b-agreement:agreement, rubric B, dev}}. Under rubric A, on the same rows, it is {{out:rubric-b-agreement:agreement, rubric A, dev}}. The paired difference is {{out:rubric-b-agreement:paired difference, dev}}. For each dev row, the code scores 1 when a wording agrees with the humans and 0 when it does not. The paired difference is rubric B's score minus rubric A's, averaged over the dev rows, and its interval is bootstrapped over those rows. The example's reading of that interval is {{out:rubric-b-agreement:paired difference, dev, reading}}.
+No difference shown on dev. Agreement under rubric B is {{out:rubric-b-agreement:agreement, rubric B, dev}}. Under rubric A, on the same rows, it is {{out:rubric-b-agreement:agreement, rubric A, dev}}. The paired difference is {{out:rubric-b-agreement:paired difference, dev}}. For each dev row, the code scores 1 when a wording agrees with the humans and 0 when it does not. The paired difference is the variant's score minus the baseline's, here rubric B's agreement score minus rubric A's, averaged over the dev rows, and its interval is bootstrapped over those rows. The example's reading of that interval is {{out:rubric-b-agreement:paired difference, dev, reading}}.
 
 The interval includes zero, so the dev estimate does not show that rubric B is better. Rubric B has no held-out run, so its dev estimate has no second check. Its unreadable replies are {{out:rubric-b-agreement:unreadable, rubric B}}, so no reply was left out.
 
@@ -80,7 +80,7 @@ The input is the baseline's answer-judge verdicts for the test items, all 120 of
 
 The observed pass rate over the readable items is {{out:corrected-pass-rate:observed pass rate, readable items}}. The correction uses TPR and TNR from dev, and those are the only rows it may use. Its TPR on dev is {{out:corrected-pass-rate:TPR, dev}}. Its TNR on dev is {{out:corrected-pass-rate:TNR, dev}}.
 
-The corrected rate is {{out:corrected-pass-rate:corrected pass rate}}. The corrected rate estimates the share of sablefile's replies that a person would pass, under the book's correctness cut. It is not the judge's pass rate, which is the observed rate above, and it is not the assistant's accuracy. The estimate holds only if the judge's errors on sablefile's answers match its errors on HelpSteer2 rows. That is the [transfer assumption](#transfer-assumption), and the TPR and TNR above come from a reference-free judge rating other models' responses, while the answer judge checks sablefile's replies against a reference.
+The corrected rate is {{out:corrected-pass-rate:corrected pass rate}}. The corrected rate estimates the share of sablefile's readable replies that a person would pass, under the book's correctness cut. It is not the judge's pass rate, which is the observed rate above, and it is not the assistant's accuracy. The estimate holds only if the judge's errors on sablefile's answers match its errors on HelpSteer2 rows. That is the [transfer assumption](#transfer-assumption), and the TPR and TNR above come from a reference-free judge rating other models' responses, while the answer judge checks sablefile's replies against a reference.
 
 The corrected rate is higher than the observed rate, and the crossover point shows why. The observed rate sits above the crossover point, where the judge reads low. At that rate the judge's misses on true passes outweigh its false passes, so the correction raises it.
 
@@ -93,6 +93,12 @@ The result is also close to the code's ceiling. The code clips the corrected rat
 [Example: correction-sensitivity](../examples/correction-sensitivity.py)
 
 The example resamples both the dev rows and the readable items, 2,000 times, with the book's fixed seed, and it reads the spread of the corrected rate. The 95% interval is {{out:correction-sensitivity:corrected pass rate, 95% interval}}. It is wide, because TPR and TNR each rest on a few dozen dev rows, and its upper end is the cap itself. Some resamples reach the cap. Their share is {{out:correction-sensitivity:resamples at the 100% cap}}. Resamples refused for a denominator under 0.1 are {{out:correction-sensitivity:resamples refused, TPR + TNR - 1 below 0.1}}, and the interval is taken over the rest.
+
+![The resamples pile up at the 100% cap, a bar taller than any bin below it, so the interval's top end is the cap](../examples/figures/corrected-resamples.svg "The corrected pass rate over the bootstrap resamples, with the cap and the interval's ends")
+
+[Example: figure-corrected-resamples](../examples/figure-corrected-resamples.py)
+
+{{fig:corrected-resamples}} shows those resamples as bars. The bar at the cap, drawn beside the 100% line, is taller than any bin below it. The bins below the cap are {{out:figure-corrected-resamples:bin width below the cap, in points}} points wide, and the fullest one holds {{out:figure-corrected-resamples:resamples in the fullest bin below the cap}} resamples.
 
 The one-row moves are these. If one dev row that humans passed had been judged PASS rather than FAIL, TPR would be one row higher, and the corrected rate would be {{out:correction-sensitivity:corrected, TPR one row higher}}. If one such row had been judged FAIL, TPR would be one row lower, and the corrected rate would be {{out:correction-sensitivity:corrected, TPR one row lower}}. For TNR, one dev row that humans failed and the judge passed would change the rate to {{out:correction-sensitivity:corrected, TNR one row higher}} if it were judged FAIL, and to {{out:correction-sensitivity:corrected, TNR one row lower}} if it were judged PASS. TPR is the rate to watch: one row there moves the answer by four to five points, while one row of TNR moves it by about half a point.
 

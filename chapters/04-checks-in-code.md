@@ -12,7 +12,7 @@ A team that writes checks only for the marks it can see reports a clean run and 
 
 ## What a code check can see {#what-a-code-check-can-see}
 
-A code check reads two things: the reply's text, and the item's own data, which holds its reference answer and the list of sections that support it. It gives the same answer on every run, and it costs nothing to run again on a new batch of replies. Those are its strengths. Its limit is that it reads form and membership, never meaning. It can tell whether a reply has a citation, whether the cited ID was in the prompt, and whether the reply is exactly the decline sentence. It can't tell whether the cited section says what the answer says.
+A code check reads the reply's text and data the run already holds: the item's own data, which holds its reference answer and the list of sections that support it, the sections the prompt gave, and the docs' section IDs. It gives the same answer on every run, and it costs nothing to run again on a new batch of replies. Those are its strengths. Its limit is that it reads form and membership, never meaning. It can tell whether a reply has a citation, whether the cited ID was in the prompt, and whether the reply is exactly the decline sentence. It can't tell whether the cited section says what the answer says.
 
 Here is chapter 2's list of modes, each with what a code check can see of it.
 
@@ -26,7 +26,7 @@ Here is chapter 2's list of modes, each with what a code check can see of it.
 
 A program can also do a judge's work when the rule it applies can be written down. In the preprint [*Can Programs Replace LLM Judges?*](https://arxiv.org/abs/2611.24849) (arXiv 2611.24849, v1, read on 21 November 2026), Agichtein and colleagues have a frontier model turn relevance guidelines into one program per topic, for a task this book leaves to other books: labelling which documents answer a search. The authors report that on TREC DL 2019 to 2021 these programs agree with the NIST assessors at the level of Claude Sonnet 5.5 used as a judge. A program like that is written once, gives the same answer on every run and can be read line by line, which are the strengths this section claims for a code check.
 
-**Working rule:** Write a code check for a failure only when the reply and the item already hold the fact the check needs. For a failure whose evidence is the claim itself, send it to a judge with a written rubric, as [chapter 5](a-judge-with-a-rubric) does, and keep the code check for the parts of the failure that can be read.
+**Working rule:** Write a code check for a failure only when the reply, the item or the run already holds the fact the check needs. For a failure whose evidence is the claim itself, send it to a judge with a written rubric, as [chapter 5](a-judge-with-a-rubric) does, and keep the code check for the parts of the failure that can be read.
 
 ## Format checks {#format-checks}
 
@@ -102,17 +102,23 @@ The three pairs are written for this example, so the scores show what each prope
 
 Two word-overlap scores borrowed from other tasks can be used to check generated text. BLEU came from machine translation and ROUGE from summarisation. Both are cheap to compute.
 
-Papineni and colleagues proposed BLEU in 2002 as a quick and inexpensive way to score machine translation. It uses modified n-gram precision ([Papineni and colleagues, 2002](https://aclanthology.org/P02-1040.pdf)). Reiter's review of how well BLEU tracks human judgement found that the evidence supports it for diagnostic evaluation of machine translation systems. It does not support BLEU outside machine translation, for evaluation of individual texts, or for hypothesis testing ([Reiter, 2018](https://aclanthology.org/J18-3002.pdf)). A score that holds for systems doesn't thereby hold for one answer.
+Papineni and colleagues proposed BLEU in 2002 as a quick and inexpensive way to score machine translation, from modified n-gram precision and a brevity penalty ([Papineni and colleagues, 2002](https://aclanthology.org/P02-1040.pdf)). Reiter's review of how well BLEU tracks human judgement found that the evidence supports it for diagnostic evaluation of machine translation systems. It does not support BLEU outside machine translation, for evaluation of individual texts, or for hypothesis testing ([Reiter, 2018](https://aclanthology.org/J18-3002.pdf)). A score that holds for systems doesn't thereby hold for one answer.
 
 Lin defined ROUGE-N as an n-gram recall: the share of the reference's word runs that the candidate covers ([Lin, 2004](https://aclanthology.org/W04-1013.pdf)). That paper is about summaries. A separate study tested metrics borrowed from machine translation on dialogue responses, not on documentation answers. It found they correlate very weakly with human judgement on a general chat data set, and not at all on a technical one, the Ubuntu help data ([Liu and colleagues, 2016](https://arxiv.org/pdf/1603.08023)). That is one study of one task. Sablefile's answers are technical, so the result is a warning, not a measurement of this assistant.
 
-Three questions about sablefile 2.0 show the problem most plainly. Each has a written reference answer, a wrong answer that copies most of the reference's words, and a right answer that says the same thing in few of them. The answers are written for this example, not taken from a recording, so they show that the failure can happen, not how often. The BLEU-style score takes clipped 1- to 4-gram precision, its geometric mean and a brevity penalty. ROUGE-1 F1 counts single words. Both formulas are written out in the example's code. No BLEU or ROUGE package is pinned in this book, and the example reports F1, which combines recall with precision, not the recall Lin defined.
+Three questions about sablefile 2.0 show the problem most plainly. Each has a written reference answer, a wrong answer that copies most of the reference's words, and a right answer that says the same thing in few of them. The answers are written for this example, not taken from a recording, so they show that the failure can happen, not how often. The BLEU-style score takes clipped 1- to 4-gram precision, its geometric mean and a brevity penalty. ROUGE-1 F1 counts the single words a candidate shares with its reference, as an F1. Both formulas are written out in the example's code. No BLEU or ROUGE package is pinned in this book, and the example reports F1, the harmonic mean of recall and precision, not the recall Lin defined.
 
 [Example: overlap-misleads](../examples/overlap-misleads.py)
 
 The wrong answer outscores the right one on ROUGE-1 F1 in {{out:overlap-misleads:pairs where the wrong answer has the higher ROUGE-1 F1}} pairs. For pair one, the wrong answer scores {{out:overlap-misleads:pair 1, wrong answer, ROUGE-1 F1}}, and the right answer scores {{out:overlap-misleads:pair 1, right answer, ROUGE-1 F1}}.
 
 Read the BLEU lines with care. The formula the code writes out has no smoothing, so the score is zero whenever any of the four n-gram orders has no match at all. Each right answer shares single words with its reference but no two-word run, so its two-word precision is zero, and so is its BLEU. That is the formula's behaviour, and it says nothing about whether the answer is good.
+
+{{fig:overlap-wrong-right}} draws each pair as a row of ROUGE-1 F1 scores, one marker for the wrong answer and one for the right, named in the legend. In every pair the wrong answer scores higher, and its smallest lead over the right answer is {{out:figure-overlap-wrong-right:smallest wrong-minus-right gap, ROUGE-1 F1}}.
+
+![In every pair the wrong answer scores a higher ROUGE-1 F1 than the right answer](../examples/figures/overlap-wrong-right.svg "Each pair's wrong and right answer, scored by ROUGE-1 F1")
+
+[Example: figure-overlap-wrong-right](../examples/figure-overlap-wrong-right.py)
 
 ROUGE-1 F1 counts single words and ignores their order. A wrong answer that repeats most of the reference's words gets most of the score back, whatever words it gets wrong. Pair three shows it. Its wrong answer scores {{out:overlap-misleads:pair 3, wrong answer, ROUGE-1 F1}}. That answer names the file from version 1.1, where the reference names `.sablefile/lock.json`. Every word of the wrong answer appears in the reference, and the only reference word it lacks is `json`. The file name is the part of the answer that matters, and the score can't tell that part from the rest.
 

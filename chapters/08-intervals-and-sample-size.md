@@ -48,7 +48,7 @@ The method also depends on the set being a fair sample of the questions, which [
 
 ## Paired comparisons {#paired-comparisons}
 
-Two prompts answer the same questions, so their results are paired. A paired comparison subtracts, for each item, the verdict of the baseline from the verdict of prompt B, and averages the differences over the set. Its interval comes from the bootstrap over items.
+Two prompts answer the same questions, so their results are paired. A paired comparison subtracts, for each item, the verdict of the baseline from the verdict of the variant, here prompt B, and averages the differences over the set. Its interval comes from the bootstrap over items.
 
 Pairing matters because most items agree. An item that both prompts pass, or both fail, contributes nothing to the difference, whatever the question's difficulty. The comparison's spread comes from the items on which the two prompts split. An unpaired comparison takes two separate pass rates and sets them side by side. It carries the variation between questions on every item, including the ones that agree, and that variation can hide a real difference. The paired version cancels the part the two prompts share. The argument for paired differences in Miller (2024) says the same: the variance of a paired difference falls as long as the two models' scores on each item are positively correlated.
 
@@ -60,7 +60,7 @@ The baseline passes {{out:paired-prompt-b:P1 (baseline) pass rate}}. Prompt B pa
 
 The split shows where the difference lives. {{out:paired-prompt-b:items both pass}} items pass under both prompts, and {{out:paired-prompt-b:items neither passes}} fail under both. Only the items that split move the difference: {{out:paired-prompt-b:items only P2 passes}} pass only under prompt B, and {{out:paired-prompt-b:items only P1 passes}} pass only under the baseline.
 
-The interval includes zero, so the reading is {{out:paired-prompt-b:reading}}. The interval runs from a drop to a rise, and this set can't say which end is nearer. No difference detected is a finding about a set at its size. It is not a claim that the prompts are equal, and the text shouldn't say they are.
+The interval includes zero, so the reading is {{out:paired-prompt-b:reading}}. The interval runs from a drop to a rise, and this set can't say which end is nearer. No difference detected, the reading when the interval includes zero, is a finding about a set at its size. It is not a claim that the prompts are equal, and the text shouldn't say they are.
 
 **Working rule:** Compare variants on the same items, paired, and report the difference with its interval and n. Call one variant better only when the whole interval sits above zero, and worse only when the whole interval sits below it. When the interval includes zero, report no difference detected at that n, and say how many items the difference would need, as [How many questions a difference needs](#how-many-questions) works out.
 
